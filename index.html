@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Command â Max England</title>
+<style>
+:root {
+  --bg:#1c1a17;--surface:#272420;--surface-2:#312d29;--surface-3:#3a352f;--border:#3d3730;
+  --text:#e8dcc8;--muted:#9a8f7e;--amber:#d97706;--amber-l:#f59e0b;--amber-d:#92400e;
+  --pri-blocker:#ef4444;--pri-critical:#f97316;--pri-high:#eab308;--pri-medium:#3b82f6;--pri-low:#6b7280;
+  --cat-physical:#d97706;--cat-business:#059669;--cat-tech:#3b82f6;--cat-operations:#ea580c;--cat-vision:#7c3aed;
+  --stage-ideas:#a78bfa;--stage-discovery:#34d399;--stage-todo:#6ee7b7;--stage-doing:#f59e0b;
+  --stage-verify:#f87171;--stage-iterate:#fb923c;--stage-done:#86efac;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column}
+
+/* ââ SCROLLBARS ââ */
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--surface-3);border-radius:5px;border:2px solid var(--bg)}
+::-webkit-scrollbar-thumb:hover{background:var(--amber-d)}
+::-webkit-scrollbar-corner{background:var(--bg)}
+
+/* ââ HEADER ââ */
+header{height:52px;background:var(--surface);border-bottom:2px solid var(--amber-d);display:flex;align-items:center;justify-content:space-between;padding:0 16px;flex-shrink:0;gap:12px}
+.h-left{display:flex;align-items:center;gap:10px}
+.logo{font-size:14px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--amber-l)}
+.logo-sub{font-size:11px;color:var(--muted)}
+.tabs{display:flex;gap:2px}
+.tab{background:none;border:none;color:var(--muted);padding:6px 14px;cursor:pointer;font-size:12px;font-weight:600;border-radius:4px;transition:all .15s;text-transform:uppercase;letter-spacing:.06em}
+.tab:hover{background:var(--surface-2);color:var(--text)}
+.tab.on{background:var(--amber-d);color:var(--amber-l)}
+.btn-add{background:var(--amber-d);border:none;border-radius:4px;color:var(--amber-l);cursor:pointer;font-size:12px;font-weight:700;padding:6px 14px;white-space:nowrap}
+.btn-add:hover{background:var(--amber);color:#000}
+
+/* ââ STATS BAR ââ */
+.stats{height:36px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 16px;gap:16px;flex-shrink:0;overflow-x:auto}
+.stat{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);white-space:nowrap}
+.stat b{color:var(--text);font-size:13px}
+.dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+/* ââ FILTER BAR ââ */
+.filterbar{height:38px;background:var(--surface-2);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 16px;gap:8px;flex-shrink:0;overflow-x:auto}
+.fl{font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}
+.fc{background:none;border:1px solid var(--border);border-radius:12px;color:var(--muted);cursor:pointer;font-size:10px;padding:2px 10px;transition:all .15s;white-space:nowrap;font-family:inherit}
+.fc:hover{border-color:var(--amber-d);color:var(--text)}
+.fc.on{border-color:var(--amber);color:var(--amber-l);background:rgba(217,119,6,.12)}
+.fsearch{background:var(--bg);border:1px solid var(--border);border-radius:12px;color:var(--text);font-size:11px;padding:3px 10px;outline:none;font-family:inherit;width:140px;margin-left:auto;flex-shrink:0}
+.fsearch:focus{border-color:var(--amber-d)}
+.fsearch::placeholder{color:var(--muted)}
+
+/* ââ MAIN ââ */
+.main{flex:1;overflow:hidden;position:relative}
+.view{display:none;height:100%;width:100%}
+.view.on{display:flex}
+
+/* ââ BOARD ââ */
+#board{overflow-x:auto;overflow-y:hidden;padding:14px 16px;gap:10px;align-items:flex-start}
+.col{flex-shrink:0;width:244px;display:flex;flex-direction:column;max-height:100%}
+.col-head{padding:9px 11px;border-radius:5px 5px 0 0;display:flex;align-items:center;justify-content:space-between}
+.col-title{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.12em}
+.col-cnt{font-size:10px;background:rgba(255,255,255,.12);border-radius:9px;padding:1px 7px;font-weight:700}
+.col-body{flex:1;overflow-y:auto;padding:7px;border-radius:0 0 5px 5px;min-height:80px;border:1px solid var(--border);border-top:none;background:var(--surface);transition:background .12s,border-color .12s}
+.col-body.over{border-color:var(--amber);background:rgba(217,119,6,.06)}
+[data-col=ideas] .col-head{background:#2a2640;color:var(--stage-ideas)}
+[data-col=discovery] .col-head{background:#1a2e2a;color:var(--stage-discovery)}
+[data-col=todo] .col-head{background:#1a2a1e;color:var(--stage-todo)}
+[data-col=doing] .col-head{background:#2e2814;color:var(--stage-doing)}
+[data-col=verify] .col-head{background:#2e1a1a;color:var(--stage-verify)}
+[data-col=iterate] .col-head{background:#2e2414;color:var(--stage-iterate)}
+[data-col=done] .col-head{background:#182818;color:var(--stage-done)}
+
+/* ââ CARDS ââ */
+.card{background:var(--surface-2);border:1px solid var(--border);border-radius:6px;margin-bottom:7px;cursor:pointer;transition:border-color .15s,box-shadow .15s;position:relative;user-select:none;overflow:hidden}
+.card:hover{border-color:var(--amber-d);box-shadow:0 3px 12px rgba(0,0,0,.4)}
+.card.dragging{opacity:.35;transform:rotate(1.5deg);cursor:grabbing}
+.card-cover{height:4px;width:100%}
+.card-body{padding:9px 10px 8px 10px}
+.card-title-row{display:flex;align-items:flex-start;gap:6px;margin-bottom:4px}
+.pri-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:3px}
+.card-name{font-size:12px;font-weight:700;line-height:1.35;flex:1}
+.card-labels{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:5px}
+.lchip{font-size:9px;padding:1px 6px;border-radius:3px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.card-ctx{font-size:10px;color:var(--muted);line-height:1.45;margin-bottom:6px}
+.prog-wrap{margin-bottom:6px}
+.prog-bar{height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.prog-fill{height:100%;border-radius:2px;transition:width .3s}
+.prog-lbl{font-size:9px;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:2px}
+.card-foot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:4px}
+.card-foot-left{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.cat-badge{font-size:9px;padding:2px 6px;border-radius:3px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.due-badge{font-size:9px;padding:2px 6px;border-radius:3px;font-weight:600;background:var(--surface-3);color:var(--muted)}
+.due-badge.overdue{background:#ef444422;color:#ef4444}
+.due-badge.soon{background:#f9731622;color:#f97316}
+.eff-badge{font-size:9px;padding:2px 6px;border-radius:3px;font-weight:700;background:rgba(255,255,255,.07);color:var(--muted)}
+.icon-btn{background:none;border:none;color:var(--muted);cursor:pointer;font-size:11px;padding:2px 5px;border-radius:3px;line-height:1;transition:all .1s}
+.icon-btn:hover{background:var(--border);color:var(--text)}
+
+/* ââ INLINE TASKS ââ */
+.tasks{display:none;padding:0 10px 8px 10px;border-top:1px solid var(--border)}
+.tasks.open{display:block;padding-top:8px}
+.task-row{display:flex;align-items:center;gap:5px;padding:2px 0}
+.task-row input{accent-color:var(--amber);cursor:pointer;flex-shrink:0}
+.task-row label{font-size:11px;cursor:pointer;flex:1;line-height:1.3}
+.task-row.done label{text-decoration:line-through;color:var(--muted)}
+.task-del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:10px;padding:0 2px;opacity:0}
+.task-row:hover .task-del{opacity:1}
+.add-task{display:flex;gap:4px;margin-top:5px}
+.add-task input{flex:1;background:var(--bg);border:1px solid var(--border);border-radius:3px;color:var(--text);font-size:10px;padding:3px 6px;outline:none;font-family:inherit}
+.add-task input:focus{border-color:var(--amber-d)}
+.add-task button{background:var(--amber-d);border:none;border-radius:3px;color:var(--amber-l);cursor:pointer;font-size:11px;padding:2px 8px;font-weight:700}
+.add-task button:hover{background:var(--amber);color:#000}
+.add-card-btn{display:flex;align-items:center;justify-content:center;gap:4px;width:100%;background:none;border:1px dashed var(--border);border-radius:5px;color:var(--muted);cursor:pointer;padding:7px;font-size:11px;margin-top:3px;transition:all .15s}
+.add-card-btn:hover{border-color:var(--amber-d);color:var(--amber-l)}
+
+/* ââ MIND MAP ââ */
+#tree{overflow:hidden;position:relative;padding:0}
+#map-svg{width:100%;height:100%;cursor:grab;display:block;user-select:none}
+.map-controls{position:absolute;top:10px;right:10px;z-index:5;display:flex;gap:6px}
+.map-ctrl-btn{background:var(--surface);border:1px solid var(--border);border-radius:4px;color:var(--muted);cursor:pointer;font-size:11px;padding:5px 10px;font-family:inherit;transition:all .15s}
+.map-ctrl-btn:hover{border-color:var(--amber-d);color:var(--text)}
+.map-hint{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--muted);background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:4px 10px;pointer-events:none;white-space:nowrap}
+
+/* ââ DETAIL MODAL ââ */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;align-items:center;justify-content:center;padding:20px}
+.overlay.on{display:flex}
+.modal-detail{background:var(--surface);border:1px solid var(--border);border-radius:10px;width:820px;max-width:96vw;max-height:92vh;display:flex;flex-direction:column;overflow:hidden}
+.modal-hdr{padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;flex-shrink:0}
+.modal-type{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;padding:3px 8px;border-radius:3px;background:rgba(217,119,6,.2);color:var(--amber-l);white-space:nowrap}
+.modal-title-inp{flex:1;background:none;border:none;color:var(--text);font-size:16px;font-weight:700;outline:none;font-family:inherit}
+.modal-title-inp::placeholder{color:var(--muted)}
+.modal-x{background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;padding:4px 8px;border-radius:4px;line-height:1}
+.modal-x:hover{background:var(--surface-2);color:var(--text)}
+.modal-body{display:flex;flex:1;overflow:hidden}
+.modal-left{flex:1;padding:20px;overflow-y:auto;border-right:1px solid var(--border)}
+.modal-sec{margin-bottom:20px}
+.modal-sec-ttl{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:8px}
+.modal-desc{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:5px;color:var(--text);font-size:12px;padding:10px 12px;outline:none;font-family:inherit;resize:vertical;min-height:90px;line-height:1.6}
+.modal-desc:focus{border-color:var(--amber-d)}
+.modal-prog-bar{height:6px;background:var(--border);border-radius:3px;overflow:hidden;margin:6px 0 10px}
+.modal-prog-fill{height:100%;border-radius:3px;background:var(--amber);transition:width .3s}
+.modal-task-wrap{border-bottom:1px solid var(--border);padding-bottom:2px;margin-bottom:2px}
+.modal-task-row{display:flex;align-items:center;gap:8px;padding:4px 6px;border-radius:4px}
+.modal-task-row input[type=checkbox]{accent-color:var(--amber);cursor:pointer;width:14px;height:14px;flex-shrink:0}
+.modal-task-row label{font-size:12px;cursor:pointer;flex:1;line-height:1.4}
+.modal-task-row.done label{text-decoration:line-through;color:var(--muted)}
+.modal-task-del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:12px;padding:0 4px;opacity:0}
+.modal-task-row:hover{background:var(--surface-2)}
+.modal-task-row:hover .modal-task-del{opacity:1}
+.modal-st-toggle{background:none;border:none;color:var(--amber-d);cursor:pointer;font-size:9px;padding:2px 5px;font-family:inherit;flex-shrink:0;border:1px solid var(--border);border-radius:3px;line-height:1.3;transition:all .12s}
+.modal-st-toggle:hover{border-color:var(--amber);color:var(--amber-l)}
+.modal-st-section{padding:4px 0 4px 22px;border-left:2px solid var(--border);margin:0 0 6px 10px}
+.modal-st-row{display:flex;align-items:center;gap:6px;padding:3px 4px;border-radius:3px}
+.modal-st-row input[type=checkbox]{accent-color:var(--amber);cursor:pointer;width:11px;height:11px;flex-shrink:0}
+.modal-st-row label{font-size:11px;cursor:pointer;flex:1;color:var(--muted)}
+.modal-st-row.done label{text-decoration:line-through;opacity:.5}
+.modal-st-del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:10px;padding:0 3px;opacity:0}
+.modal-st-row:hover{background:var(--surface-2)}
+.modal-st-row:hover .modal-st-del{opacity:1}
+.modal-add-st{display:flex;gap:4px;margin-top:4px}
+.modal-add-st input{flex:1;background:var(--bg);border:1px solid var(--border);border-radius:3px;color:var(--text);font-size:11px;padding:4px 7px;outline:none;font-family:inherit}
+.modal-add-st input:focus{border-color:var(--amber-d)}
+.modal-add-st button{background:var(--surface-3);border:none;border-radius:3px;color:var(--amber-l);cursor:pointer;font-size:11px;padding:3px 8px}
+.modal-add-st button:hover{background:var(--amber-d)}
+.modal-add-task{display:flex;gap:6px;margin-top:8px}
+.modal-add-task input{flex:1;background:var(--bg);border:1px solid var(--border);border-radius:4px;color:var(--text);font-size:12px;padding:6px 10px;outline:none;font-family:inherit}
+.modal-add-task input:focus{border-color:var(--amber-d)}
+.modal-add-task button{background:var(--amber-d);border:none;border-radius:4px;color:var(--amber-l);cursor:pointer;font-size:12px;padding:6px 12px;font-weight:700}
+.modal-add-task button:hover{background:var(--amber);color:#000}
+.modal-right{width:224px;flex-shrink:0;padding:18px;overflow-y:auto;background:var(--surface-2)}
+.prop-row{margin-bottom:14px}
+.prop-lbl{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;display:block}
+.prop-sel{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:4px;color:var(--text);font-size:11px;padding:6px 8px;outline:none;font-family:inherit;-webkit-appearance:none;cursor:pointer}
+.prop-sel:focus{border-color:var(--amber-d)}
+.prop-inp{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:4px;color:var(--text);font-size:11px;padding:6px 8px;outline:none;font-family:inherit}
+.prop-inp:focus{border-color:var(--amber-d)}
+.labels-grid{display:flex;flex-wrap:wrap;gap:4px}
+.ltog{border:1px solid var(--border);border-radius:4px;cursor:pointer;font-size:9px;padding:3px 7px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;transition:all .15s;font-family:inherit;background:var(--bg);color:var(--muted)}
+.notion-links{display:flex;flex-direction:column;gap:5px;margin-bottom:6px}
+.nlink{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--amber-l);text-decoration:none;padding:5px 8px;background:var(--bg);border:1px solid var(--border);border-radius:4px;transition:border-color .15s;word-break:break-all}
+.nlink:hover{border-color:var(--amber-d)}
+.nlink-inp{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:4px;color:var(--text);font-size:10px;padding:5px 8px;outline:none;font-family:inherit}
+.nlink-inp:focus{border-color:var(--amber-d)}
+.nlink-inp::placeholder{color:var(--muted)}
+.modal-ftr{padding:12px 20px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end;flex-shrink:0}
+.btn-danger{background:none;border:1px solid #ef444444;border-radius:4px;color:#ef4444;cursor:pointer;font-size:11px;padding:6px 12px;font-family:inherit}
+.btn-danger:hover{background:#ef444415}
+.btn-sec{background:var(--surface-2);border:1px solid var(--border);border-radius:4px;color:var(--muted);cursor:pointer;font-size:12px;padding:6px 12px;font-family:inherit}
+.btn-sec:hover{color:var(--text)}
+.btn-pri{background:var(--amber-d);border:none;border-radius:4px;color:var(--amber-l);cursor:pointer;font-size:12px;font-weight:700;padding:6px 14px;font-family:inherit}
+.btn-pri:hover{background:var(--amber);color:#000}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="h-left">
+    <span class="logo">Project Command</span>
+    <span class="logo-sub">Max England Â· Dalton, GA</span>
+  </div>
+  <nav class="tabs">
+    <button class="tab on" onclick="setView('board')">â Board</button>
+    <button class="tab" onclick="setView('tree')">â Mind Map</button>
+  </nav>
+  <button class="btn-add" onclick="openNewCard()">+ Project</button>
+</header>
+
+<div class="stats">
+  <div class="stat"><span class="dot" style="background:var(--stage-doing)"></span><b id="s-doing">0</b> Doing</div>
+  <div class="stat"><span class="dot" style="background:var(--stage-discovery)"></span><b id="s-disc">0</b> Discovery</div>
+  <div class="stat"><span class="dot" style="background:var(--stage-ideas)"></span><b id="s-ideas">0</b> Ideas</div>
+  <div class="stat"><span class="dot" style="background:var(--stage-done)"></span><b id="s-done">0</b> Done</div>
+  <div class="stat" style="margin-left:auto"><span class="dot" style="background:var(--pri-high)"></span><b id="s-high">0</b> high+</div>
+  <div class="stat"><span class="dot" style="background:var(--muted)"></span><b id="s-tasks">0</b> open paths</div>
+  <div class="stat"><span class="dot" style="background:var(--border)"></span><b id="s-subtasks">0</b> open sub-paths</div>
+  <div class="stat" style="font-size:10px;color:var(--muted)" id="saved-time"></div>
+</div>
+
+<div class="filterbar">
+  <span class="fl">Filter:</span>
+  <button class="fc" id="fc-overdue" onclick="toggleFilter('overdue')">ð´ Overdue</button>
+  <button class="fc" id="fc-blocker" onclick="toggleFilter('blocker')">â Blocker</button>
+  <button class="fc" id="fc-critical" onclick="toggleFilter('critical')">ð¥ Critical</button>
+  <button class="fc" id="fc-high" onclick="toggleFilter('high')">â High</button>
+  <button class="fc" id="fc-physical" onclick="toggleFilter('physical')">ð  Physical</button>
+  <button class="fc" id="fc-business" onclick="toggleFilter('business')">ð¼ Business</button>
+  <button class="fc" id="fc-tech" onclick="toggleFilter('tech')">â¡ Tech</button>
+  <button class="fc" id="fc-operations" onclick="toggleFilter('operations')">â Ops</button>
+  <button class="fc" id="fc-vision" onclick="toggleFilter('vision')">ð Vision</button>
+  <input class="fsearch" id="fsearch" placeholder="ð Searchâ¦" oninput="renderBoard()">
+</div>
+
+<main class="main">
+  <div id="board" class="view on"></div>
+  <div id="tree" class="view">
+    <div class="map-controls">
+      <button class="map-ctrl-btn" onclick="resetMap()">â Fit</button>
+      <button class="map-ctrl-btn" onclick="collapseAllMap()">âª Collapse</button>
+    </div>
+    <svg id="map-svg"><g id="map-g"></g></svg>
+    <div class="map-hint">Click project â expand paths Â· Click path â expand sub-paths Â· â open detail Â· Scroll to zoom Â· Drag to pan</div>
+  </div>
+</main>
+
+<div class="overlay" id="overlay" onclick="overlayBg(event)">
+  <div class="modal-detail">
+    <div class="modal-hdr">
+      <span class="modal-type" id="md-type">Project</span>
+      <input class="modal-title-inp" id="md-title" placeholder="Project nameâ¦">
+      <button class="modal-x" onclick="closeModal()">â</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-left">
+        <div class="modal-sec">
+          <div class="modal-sec-ttl">Description / Context</div>
+          <textarea class="modal-desc" id="md-desc" placeholder="Goals, sonstraints, current state, key decisionsâ¦"></textarea>
+        </div>
+        <div class="modal-sec">
+          <div class="modal-sec-ttl">Paths (Tasks) &amp; Sub-paths</div>
+          <div style="font-size:10px;color:var(--muted)" id="md-prog-lbl">No paths yet</div>
+          <div class="modal-prog-bar"><div class="modal-prog-fill" id="md-prog-fill" style="width:0%"></div></div>
+          <div id="md-checklist"></div>
+          <div class="modal-add-task">
+            <input type="text" id="md-task-inp" placeholder="Add pathâ¦" onkeydown="if(event.key==='Enter')modalAddTask()">
+            <button onclick="modalAddTask()">Add Path</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-right">
+        <div class="prop-row">
+          <span class="prop-lbl">Stage</span>
+          <select class="prop-sel" id="md-stage">
+            <option value="ideas">Ideas</option>
+            <option value="discovery">Discovery</option>
+            <option value="todo">To-Do</option>
+            <option value="doing">Doing</option>
+            <option value="verify">Verify</option>
+            <option value="iterate">Iterate</option>
+            <option value="done">Done</option>
+          </select>
+        </div>
+        <div class="prop-row">
+          <span class="prop-lbl">Priority</span>
+          <select class="prop-sel" id="md-priority">
+            <option value="blocker">â Blocker</option>
+            <option value="critical">ð¥ Critical</option>
+            <option value="high">â High</option>
+            <option value="medium">â Medium</option>
+            <option value="low">â Low</option>
+            <option value="none">â None</option>
+          </select>
+        </div>
+        <div class="prop-row">
+          <span class="prop-lbl">Category</span>
+          <select class="prop-sel" id="md-cat">
+            <option value="physical">ð  Physical / RE</option>
+            <option value="business">ð¼ Business</option>
+            <option value="tech">â¡ Technology</option>
+            <option value="operations">â Operations</option>
+            <option value="vision">ð Vision</option>
+          </select>
+        </div>
+        <div class="prop-row">
+          <span class="prop-lbl">Due Date</span>
+          <input class="prop-inp" type="date" id="md-due">
+        </div>
+        <div class="prop-row">
+          <span class="prop-lbl">Effort</span>
+          <select class="prop-sel" id="md-effort">
+            <option value="">â Unset</option>
+            <option value="xs">XS â Tiny</option>
+            <option value="s">S â Small</option>
+            <option value="m">M â Medium</option>
+            <option value="l">L â Large</option>
+            <option value="xl">XL â Major</option>
+          </select>
+        </div>
+        <div class="prop-row">
+          <span class="prop-lbl">Labels</span>
+          <div class="labels-grid" id="md-labels"></div>
+        </div>
+        <div class="prop-row">
+          <span class="prop-lbl">Notion</span>
+          <div class="notion-links">
+            <a class="nlink" href="https://www.notion.so/36bf2dbb8b558131a0e8e3c2d18163a8" target="_blank" rel="noopener">ð All Projects</a>
+            <div id="nlink-proj"></div>
+          </div>
+          <input class="nlink-inp" id="md-notion" placeholder="Paste project Notion URLâ¦" type="url" oninput="updateNotionPreview()">
+        </div>
+      </div>
+    </div>
+    <div class="modal-ftr">
+      <button class="btn-danger" onclick="archiveCard()">Archive</button>
+      <button class="btn-sec" onclick="closeModal()">Cancel</button>
+      <button class="btn-pri" onclick="saveModal()">Save</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ââ CONSTANTS ââ
+const STAGES=['ideas','discovery','todo','doing','verify','iterate','done'];
+const SLBL={ideas:'Ideas',discovery:'Discovery',todo:'To-Do',doing:'Doing',verify:'Verify',iterate:'Iterate',done:'Done'};
+const CC={physical:'#d97706',business:'#059669',tech:'#3b82f6',operations:'#ea580c',vision:'#7c3aed'};
+const CL={physical:'Physical/RE',business:'Business',tech:'Tech',operations:'Ops',vision:'Vision'};
+const CI={physical:'ð ',business:'ð¼',tech:'â¡',operations:'â',vision:'ð'};
+const SC={ideas:'#a78bfa',discovery:'#34d399',todo:'#6ee7b7',doing:'#f59e0b',verify:'#f87171',iterate:'#fb923c',done:'#86efac'};
+const PC={blocker:'#ef4444',critical:'#f97316',high:'#eab308',medium:'#3b82f6',low:'#6b7280',none:'transparent'};
+const PL={blocker:'â Blocker',critical:'ð¥ Critical',high:'â High',medium:'â Medium',low:'â Low',none:'â None'};
+const EL={xs:'XS',s:'S',m:'M',l:'L',xl:'XL'};
+const LDEFS=[
+  {k:'urgent',  c:'#ef4444',bg:'#ef444420',lbl:'Urgent'},
+  {k:'blocked', c:'#f97316',bg:'#f9731620',lbl:'Blocked'},
+  {k:'revenue', c:'#10b981',bg:'#10b98120',lbl:'Revenue'},
+  {k:'research',c:'#8b5cf6',bg:'#8b5cf620',lbl:'Research'},
+  {k:'legal',   c:'#f59e0b',bg:'#f59e0b20',lbl:'Legal'},
+  {k:'build',   c:'#3b82f6',bg:'#3b82f620',lbl:'Build'},
+  {k:'personal',c:'#ec4899',bg:'#ec489920',lbl:'Personal'},
+];
+const TG=[
+  {k:'physical', lbl:'Physical Assets', icon:'ð '},
+  {k:'business', lbl:'Business',        icon:'ð¼'},
+  {k:'tech',     lbl:'Technology',      icon:'â¡'},
+  {k:'operations',lbl:'Operations',     icon:'â'},
+  {k:'vision',   lbl:'Vision',          icon:'ð'},
+];
+const KEY='max_project_command_v3';
+const KEY2='max_project_command_v2';
+
+// ââ SEED DATA ââ
+const SEED=[
+  {id:'p1',name:'Swann Drive Renovation',stage:'doing',cat:'physical',priority:'high',effort:'xl',dueDate:'',labels:['build'],notionUrl:'',
+   ctx:'Asset repositioning. $100k HELOC under consideration. Target valuation ~$650k. DIY + contractor hybrid.',
+   tasks:[
+     {id:'t1a',text:'Evaluate HELOC options and lenders',done:false,subtasks:[]},
+     {id:'t1b',text:'Finalize FLW prairie design direction',done:false,subtasks:[]},
+     {id:'t1c',text:'Get structural assessment for addition scope',done:false,subtasks:[]},
+     {id:'t1d',text:'Sequence trades: demo â framing â MEP â finish',done:false,subtasks:[]}
+   ]},
+  {id:'p2',name:'Global Sourcing / Alibaba',stage:'discovery',cat:'operations',priority:'medium',effort:'m',dueDate:'',labels:['research'],notionUrl:'',
+   ctx:'Windows, doors, fixtures, cabinetry, equipment. MOQ, CBM, DDP vs FOB vs EXW, landed cost, code compliance.',
+   tasks:[
+     {id:'t2a',text:'Map required items to Alibaba supplier categories',done:false,subtasks:[]},
+     {id:'t2b',text:'Calculate landed cost: windows + doors (DDP vs FOB)',done:false,subtasks:[]},
+     {id:'t2c',text:'Research IECC Zone 3 compliance for imported windows',done:false,subtasks:[]}
+   ]},
+  {id:'p3',name:'Real Estate Investment',stage:'doing',cat:'physical',priority:'high',effort:'l',dueDate:'',labels:['revenue'],notionUrl:'',
+   ctx:'Duplex operating ($3,300/mo gross). Dalton/Chattanooga focus for next acquisition. Rentals, small multifamily.',
+   tasks:[
+     {id:'t3a',text:'Analyze duplex P&L vs market rate (utilities-included math)',done:false,subtasks:[]},
+     {id:'t3b',text:'Screen 5 acquisition targets: Dalton/CHA small MF',done:false,subtasks:[]},
+     {id:'t3c',text:'Review DSCR loan options for next purchase',done:false,subtasks:[]}
+   ]},
+  {id:'p4',name:'Business Acquisition',stage:'discovery',cat:'business',priority:'high',effort:'xl',dueDate:'',labels:['revenue','research'],notionUrl:'',
+   ctx:'SBA-eligible, cash-flowing local businesses, 10â40yr operating history, owner retiring. QoE, modernization upside.',
+   tasks:[
+     {id:'t4a',text:'Define screening criteria: revenue, margin, owner age, industry',done:false,subtasks:[]},
+     {id:'t4b',text:'Identify 5 target businesses in Dalton/CHA area',done:false,subtasks:[]},
+     {id:'t4c',text:'Connect with SBA lender for 7(a) pre-qualification',done:false,subtasks:[]},
+     {id:'t4d',text:'Build QoE checklist template',done:false,subtasks:[]}
+   ]},
+  {id:'p5',name:'Hype Sports',stage:'doing',cat:'business',priority:'high',effort:'m',dueDate:'',labels:['revenue'],notionUrl:'',
+   ctx:'Youth training facility in Dalton. Partial owner. Unit economics: membership ramp, payroll, capex, payback.',
+   tasks:[
+     {id:'t5a',text:'Complete unit economics model (revenue per member)',done:false,subtasks:[]},
+     {id:'t5b',text:'Define membership tiers and pricing structure',done:false,subtasks:[]},
+     {id:'t5c',text:'Review monthly P&L vs projection',done:false,subtasks:[]}
+   ]},
+  {id:'p6',name:'Swann Diagram Studio',stage:'doing',cat:'tech',priority:'medium',effort:'l',dueDate:'',labels:['build'],notionUrl:'https://www.notion.so/36bf2dbb8b5581f0bc93f891b7632056',
+   ctx:'Home renovation PWA (React/Vite/Vercel/GitHub). Floor plans, electrical, low-voltage, network. Offline support.',
+   tasks:[
+     {id:'t6a',text:'Implement floor plan persistence layer (IndexedDB)',done:false,subtasks:[]},
+     {id:'t6b',text:'Add electrical panel schedule feature',done:false,subtasks:[]},
+     {id:'t6c',text:'Build shopping list â supplier integration',done:false,subtasks:[]},
+     {id:'t6d',text:'Service worker for offline-first mode',done:false,subtasks:[]}
+   ]},
+  {id:'p7',name:'AI Agent Architecture',stage:'doing',cat:'tech',priority:'critical',effort:'xl',dueDate:'',labels:['build','research'],notionUrl:'',
+   ctx:'Orchestrator + outreach + parsing layers, data store, reporting engine. Procurement correspondence automation.',
+   tasks:[
+     {id:'t7a',text:'Define agent swarm topology and responsibilities',done:false,subtasks:[]},
+     {id:'t7b',text:'Build procurement outreach agent MVP',done:false,subtasks:[]},
+     {id:'t7c',text:'Set up data store and reporting engine',done:false,subtasks:[]},
+     {id:'t7d',text:'Document agent-to-agent handoff protocol',done:false,subtasks:[]}
+   ]},
+  {id:'p8',name:'Energy Independence',stage:'discovery',cat:'operations',priority:'medium',effort:'xl',dueDate:'',labels:['research'],notionUrl:'',
+   ctx:'35kW solar array + 100kWh battery. Targeting 30,000 kWh/yr. Grid-tied residential.',
+   tasks:[
+     {id:'t8a',text:'Get 3 solar installer bids (panel + battery)',done:false,subtasks:[]},
+     {id:'t8b',text:'Model ROI at current rate vs net metering policy',done:false,subtasks:[]},
+     {id:'t8c',text:'Research ITC (30%), GA incentives, utility program',done:false,subtasks:[]}
+   ]},
+  {id:'p9',name:'Overemployed / Multi-Income',stage:'discovery',cat:'business',priority:'medium',effort:'m',dueDate:'',labels:['revenue','legal'],notionUrl:'',
+   ctx:'Stacked remote W2 or high-value contracts alongside SBD. Skills: PIM, digital transformation, AI/agent architecture.',
+   tasks:[
+     {id:'t9a',text:'Identify 3 target companies for parallel contract',done:false,subtasks:[]},
+     {id:'t9b',text:'Review SBD non-compete and conflict-of-interest policy',done:false,subtasks:[]},
+     {id:'t9c',text:'Draft consulting scope/rate card',done:false,subtasks:[]}
+   ]},
+  {id:'p10',name:'14th District / Regional Prosperity',stage:'ideas',cat:'vision',priority:'low',effort:'',dueDate:'',labels:['personal'],notionUrl:'https://www.notion.so/36bf2dbb8b558196a477ebd6d9901908',
+   ctx:'"Take It To The Max" campaign concept. Independent, practical-first platform. Dalton/NW Georgia focus.',
+   tasks:[]},
+];
+
+// ââ STATE ââ
+let state={projects:[]};
+let editId=null;
+let dragId=null;
+let wasDrag=false;
+let activeFilters=new Set();
+let openStSections=new Set(); // task IDs whose sub-path sections are open in modal
+
+// Mind map state
+const R_CAT=165, R_PROJ=360, R_TASK=555, R_ST=710;
+let expandedProjects=new Set();
+let expandedTasks=new Set();
+let mapScale=0.65;
+let mapOffX=0, mapOffY=0;
+let mapDragging=false;
+let mapDragSX=0, mapDragSY=0,
