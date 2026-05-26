@@ -16,15 +16,11 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;overflow:hidden}
 body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column}
-
-/* ── SCROLLBARS ── */
 ::-webkit-scrollbar{width:10px;height:10px}
 ::-webkit-scrollbar-track{background:var(--bg)}
 ::-webkit-scrollbar-thumb{background:var(--surface-3);border-radius:5px;border:2px solid var(--bg)}
 ::-webkit-scrollbar-thumb:hover{background:var(--amber-d)}
 ::-webkit-scrollbar-corner{background:var(--bg)}
-
-/* ── HEADER ── */
 header{height:52px;background:var(--surface);border-bottom:2px solid var(--amber-d);display:flex;align-items:center;justify-content:space-between;padding:0 16px;flex-shrink:0;gap:12px}
 .h-left{display:flex;align-items:center;gap:10px}
 .logo{font-size:14px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--amber-l)}
@@ -35,14 +31,10 @@ header{height:52px;background:var(--surface);border-bottom:2px solid var(--amber
 .tab.on{background:var(--amber-d);color:var(--amber-l)}
 .btn-add{background:var(--amber-d);border:none;border-radius:4px;color:var(--amber-l);cursor:pointer;font-size:12px;font-weight:700;padding:6px 14px;white-space:nowrap}
 .btn-add:hover{background:var(--amber);color:#000}
-
-/* ── STATS BAR ── */
 .stats{height:36px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 16px;gap:16px;flex-shrink:0;overflow-x:auto}
 .stat{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);white-space:nowrap}
 .stat b{color:var(--text);font-size:13px}
 .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-
-/* ── FILTER BAR ── */
 .filterbar{height:38px;background:var(--surface-2);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 16px;gap:8px;flex-shrink:0;overflow-x:auto}
 .fl{font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}
 .fc{background:none;border:1px solid var(--border);border-radius:12px;color:var(--muted);cursor:pointer;font-size:10px;padding:2px 10px;transition:all .15s;white-space:nowrap;font-family:inherit}
@@ -51,13 +43,9 @@ header{height:52px;background:var(--surface);border-bottom:2px solid var(--amber
 .fsearch{background:var(--bg);border:1px solid var(--border);border-radius:12px;color:var(--text);font-size:11px;padding:3px 10px;outline:none;font-family:inherit;width:140px;margin-left:auto;flex-shrink:0}
 .fsearch:focus{border-color:var(--amber-d)}
 .fsearch::placeholder{color:var(--muted)}
-
-/* ── MAIN ── */
 .main{flex:1;overflow:hidden;position:relative}
 .view{display:none;height:100%;width:100%}
 .view.on{display:flex}
-
-/* ── BOARD ── */
 #board{overflow-x:auto;overflow-y:hidden;padding:14px 16px;gap:10px;align-items:flex-start}
 .col{flex-shrink:0;width:244px;display:flex;flex-direction:column;max-height:100%}
 .col-head{padding:9px 11px;border-radius:5px 5px 0 0;display:flex;align-items:center;justify-content:space-between}
@@ -65,6 +53,7 @@ header{height:52px;background:var(--surface);border-bottom:2px solid var(--amber
 .col-cnt{font-size:10px;background:rgba(255,255,255,.12);border-radius:9px;padding:1px 7px;font-weight:700}
 .col-body{flex:1;overflow-y:auto;padding:7px;border-radius:0 0 5px 5px;min-height:80px;border:1px solid var(--border);border-top:none;background:var(--surface);transition:background .12s,border-color .12s}
 .col-body.over{border-color:var(--amber);background:rgba(217,119,6,.06)}
+[data-col=future] .col-head{background:#1a1a2e;color:#a78bfa}
 [data-col=ideas] .col-head{background:#2a2640;color:var(--stage-ideas)}
 [data-col=discovery] .col-head{background:#1a2e2a;color:var(--stage-discovery)}
 [data-col=todo] .col-head{background:#1a2a1e;color:var(--stage-todo)}
@@ -72,8 +61,6 @@ header{height:52px;background:var(--surface);border-bottom:2px solid var(--amber
 [data-col=verify] .col-head{background:#2e1a1a;color:var(--stage-verify)}
 [data-col=iterate] .col-head{background:#2e2414;color:var(--stage-iterate)}
 [data-col=done] .col-head{background:#182818;color:var(--stage-done)}
-
-/* ── CARDS ── */
 .card{background:var(--surface-2);border:1px solid var(--border);border-radius:6px;margin-bottom:7px;cursor:pointer;transition:border-color .15s,box-shadow .15s;position:relative;user-select:none;overflow:hidden}
 .card:hover{border-color:var(--amber-d);box-shadow:0 3px 12px rgba(0,0,0,.4)}
 .card.dragging{opacity:.35;transform:rotate(1.5deg);cursor:grabbing}
@@ -98,16 +85,12 @@ header{height:52px;background:var(--surface);border-bottom:2px solid var(--amber
 .eff-badge{font-size:9px;padding:2px 6px;border-radius:3px;font-weight:700;background:rgba(255,255,255,.07);color:var(--muted)}
 .icon-btn{background:none;border:none;color:var(--muted);cursor:pointer;font-size:11px;padding:2px 5px;border-radius:3px;line-height:1;transition:all .1s}
 .icon-btn:hover{background:var(--border);color:var(--text)}
-
-/* ── INLINE TASKS ── */
 .tasks{display:none;padding:0 10px 8px 10px;border-top:1px solid var(--border)}
 .tasks.open{display:block;padding-top:8px}
 .task-row{display:flex;align-items:center;gap:5px;padding:2px 0}
 .task-row input{accent-color:var(--amber);cursor:pointer;flex-shrink:0}
 .task-row label{font-size:11px;cursor:pointer;flex:1;line-height:1.3}
 .task-row.done label{text-decoration:line-through;color:var(--muted)}
-.task-del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:10px;padding:0 2px;opacity:0}
-.task-row:hover .task-del{opacity:1}
 .add-task{display:flex;gap:4px;margin-top:5px}
 .add-task input{flex:1;background:var(--bg);border:1px solid var(--border);border-radius:3px;color:var(--text);font-size:10px;padding:3px 6px;outline:none;font-family:inherit}
 .add-task input:focus{border-color:var(--amber-d)}
@@ -115,16 +98,31 @@ header{height:52px;background:var(--surface);border-bottom:2px solid var(--amber
 .add-task button:hover{background:var(--amber);color:#000}
 .add-card-btn{display:flex;align-items:center;justify-content:center;gap:4px;width:100%;background:none;border:1px dashed var(--border);border-radius:5px;color:var(--muted);cursor:pointer;padding:7px;font-size:11px;margin-top:3px;transition:all .15s}
 .add-card-btn:hover{border-color:var(--amber-d);color:var(--amber-l)}
-
-/* ── MIND MAP ── */
+/* FUTURE NODES */
+.fn-card{background:var(--surface-2);border:1px solid rgba(124,58,237,.25);border-radius:5px;margin-bottom:7px;padding:8px 10px}
+.fn-card:hover{border-color:rgba(124,58,237,.5)}
+.fn-card-title{font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px;line-height:1.35}
+.fn-card-note{font-size:10px;color:var(--muted);margin-bottom:6px;line-height:1.4}
+.fn-card-foot{display:flex;align-items:center;justify-content:space-between;gap:4px}
+.fn-date{font-size:9px;color:var(--muted)}
+.fn-promote-btn{background:rgba(124,58,237,.2);border:1px solid rgba(124,58,237,.4);border-radius:3px;color:#a78bfa;cursor:pointer;font-size:10px;font-weight:700;padding:2px 7px;font-family:inherit;transition:all .12s;white-space:nowrap}
+.fn-promote-btn:hover{background:rgba(124,58,237,.4);color:#c4b5fd}
+.fn-del-btn{background:none;border:1px solid var(--border);border-radius:3px;color:var(--muted);cursor:pointer;font-size:10px;padding:2px 5px;font-family:inherit;transition:all .12s}
+.fn-del-btn:hover{border-color:#ef4444;color:#ef4444}
+.fn-add-form{display:flex;flex-direction:column;gap:4px;margin-top:8px;padding-top:8px;border-top:1px solid var(--border)}
+.fn-inp{background:var(--bg);border:1px solid var(--border);border-radius:3px;color:var(--text);font-size:10px;padding:4px 7px;outline:none;font-family:inherit;width:100%}
+.fn-inp:focus{border-color:rgba(124,58,237,.6)}
+.fn-inp::placeholder{color:var(--muted)}
+.fn-add-btn{background:rgba(124,58,237,.2);border:1px solid rgba(124,58,237,.4);border-radius:3px;color:#a78bfa;cursor:pointer;font-size:10px;font-weight:700;padding:5px 8px;font-family:inherit;transition:all .12s;width:100%}
+.fn-add-btn:hover{background:rgba(124,58,237,.4)}
+/* MIND MAP */
 #tree{overflow:hidden;position:relative;padding:0}
 #map-svg{width:100%;height:100%;cursor:grab;display:block;user-select:none}
 .map-controls{position:absolute;top:10px;right:10px;z-index:5;display:flex;gap:6px}
 .map-ctrl-btn{background:var(--surface);border:1px solid var(--border);border-radius:4px;color:var(--muted);cursor:pointer;font-size:11px;padding:5px 10px;font-family:inherit;transition:all .15s}
 .map-ctrl-btn:hover{border-color:var(--amber-d);color:var(--text)}
 .map-hint{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--muted);background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:4px 10px;pointer-events:none;white-space:nowrap}
-
-/* ── DETAIL MODAL ── */
+/* MODAL */
 .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;align-items:center;justify-content:center;padding:20px}
 .overlay.on{display:flex}
 .modal-detail{background:var(--surface);border:1px solid var(--border);border-radius:10px;width:820px;max-width:96vw;max-height:92vh;display:flex;flex-direction:column;overflow:hidden}
@@ -150,7 +148,7 @@ header{height:52px;background:var(--surface);border-bottom:2px solid var(--amber
 .modal-task-del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:12px;padding:0 4px;opacity:0}
 .modal-task-row:hover{background:var(--surface-2)}
 .modal-task-row:hover .modal-task-del{opacity:1}
-.modal-st-toggle{background:none;border:none;color:var(--amber-d);cursor:pointer;font-size:9px;padding:2px 5px;font-family:inherit;flex-shrink:0;border:1px solid var(--border);border-radius:3px;line-height:1.3;transition:all .12s}
+.modal-st-toggle{background:none;border:1px solid var(--border);border-radius:3px;color:var(--amber-d);cursor:pointer;font-size:9px;padding:2px 5px;font-family:inherit;flex-shrink:0;line-height:1.3;transition:all .12s}
 .modal-st-toggle:hover{border-color:var(--amber);color:var(--amber-l)}
 .modal-st-section{padding:4px 0 4px 22px;border-left:2px solid var(--border);margin:0 0 6px 10px}
 .modal-st-row{display:flex;align-items:center;gap:6px;padding:3px 4px;border-radius:3px}
@@ -195,20 +193,19 @@ header{height:52px;background:var(--surface);border-bottom:2px solid var(--amber
 </style>
 </head>
 <body>
-
 <header>
   <div class="h-left">
     <span class="logo">Project Command</span>
-    <span class="logo-sub">Max England · Dalton, GA</span>
+    <span class="logo-sub">Max England &middot; Dalton, GA</span>
   </div>
   <nav class="tabs">
-    <button class="tab on" onclick="setView('board')">⊞ Board</button>
-    <button class="tab" onclick="setView('tree')">◈ Mind Map</button>
+    <button class="tab on" onclick="setView('board')">&#8862; Board</button>
+    <button class="tab" onclick="setView('tree')">&#9672; Mind Map</button>
   </nav>
   <button class="btn-add" onclick="openNewCard()">+ Project</button>
 </header>
-
 <div class="stats">
+  <div class="stat"><span class="dot" style="background:#7c3aed"></span><b id="s-future">0</b> Future</div>
   <div class="stat"><span class="dot" style="background:var(--stage-doing)"></span><b id="s-doing">0</b> Doing</div>
   <div class="stat"><span class="dot" style="background:var(--stage-discovery)"></span><b id="s-disc">0</b> Discovery</div>
   <div class="stat"><span class="dot" style="background:var(--stage-ideas)"></span><b id="s-ideas">0</b> Ideas</div>
@@ -218,45 +215,42 @@ header{height:52px;background:var(--surface);border-bottom:2px solid var(--amber
   <div class="stat"><span class="dot" style="background:var(--border)"></span><b id="s-subtasks">0</b> open sub-paths</div>
   <div class="stat" style="font-size:10px;color:var(--muted)" id="saved-time"></div>
 </div>
-
 <div class="filterbar">
   <span class="fl">Filter:</span>
-  <button class="fc" id="fc-overdue" onclick="toggleFilter('overdue')">🔴 Overdue</button>
-  <button class="fc" id="fc-blocker" onclick="toggleFilter('blocker')">⛔ Blocker</button>
-  <button class="fc" id="fc-critical" onclick="toggleFilter('critical')">🔥 Critical</button>
-  <button class="fc" id="fc-high" onclick="toggleFilter('high')">↑ High</button>
-  <button class="fc" id="fc-physical" onclick="toggleFilter('physical')">🏠 Physical</button>
-  <button class="fc" id="fc-business" onclick="toggleFilter('business')">💼 Business</button>
-  <button class="fc" id="fc-tech" onclick="toggleFilter('tech')">⚡ Tech</button>
-  <button class="fc" id="fc-operations" onclick="toggleFilter('operations')">⚙ Ops</button>
-  <button class="fc" id="fc-vision" onclick="toggleFilter('vision')">🌟 Vision</button>
-  <input class="fsearch" id="fsearch" placeholder="🔍 Search…" oninput="renderBoard()">
+  <button class="fc" id="fc-overdue" onclick="toggleFilter('overdue')">&#128308; Overdue</button>
+  <button class="fc" id="fc-blocker" onclick="toggleFilter('blocker')">&#9940; Blocker</button>
+  <button class="fc" id="fc-critical" onclick="toggleFilter('critical')">&#128293; Critical</button>
+  <button class="fc" id="fc-high" onclick="toggleFilter('high')">&#8593; High</button>
+  <button class="fc" id="fc-physical" onclick="toggleFilter('physical')">&#127968; Physical</button>
+  <button class="fc" id="fc-business" onclick="toggleFilter('business')">&#128188; Business</button>
+  <button class="fc" id="fc-tech" onclick="toggleFilter('tech')">&#9889; Tech</button>
+  <button class="fc" id="fc-operations" onclick="toggleFilter('operations')">&#9881; Ops</button>
+  <button class="fc" id="fc-vision" onclick="toggleFilter('vision')">&#127775; Vision</button>
+  <input class="fsearch" id="fsearch" placeholder="Search..." oninput="renderBoard()">
 </div>
-
 <main class="main">
   <div id="board" class="view on"></div>
   <div id="tree" class="view">
     <div class="map-controls">
-      <button class="map-ctrl-btn" onclick="resetMap()">⊙ Fit</button>
-      <button class="map-ctrl-btn" onclick="collapseAllMap()">▪ Collapse</button>
+      <button class="map-ctrl-btn" onclick="resetMap()">&#8857; Fit</button>
+      <button class="map-ctrl-btn" onclick="collapseAllMap()">&#9642; Collapse</button>
     </div>
     <svg id="map-svg"><g id="map-g"></g></svg>
-    <div class="map-hint">Click project → expand paths · Click path → expand sub-paths · ↗ open detail · Scroll to zoom · Drag to pan</div>
+    <div class="map-hint">Click project to expand paths &middot; Click path to expand sub-paths &middot; &#8599; open detail &middot; Scroll to zoom &middot; Drag to pan</div>
   </div>
 </main>
-
 <div class="overlay" id="overlay" onclick="overlayBg(event)">
   <div class="modal-detail">
     <div class="modal-hdr">
       <span class="modal-type" id="md-type">Project</span>
-      <input class="modal-title-inp" id="md-title" placeholder="Project name…">
-      <button class="modal-x" onclick="closeModal()">✕</button>
+      <input class="modal-title-inp" id="md-title" placeholder="Project name...">
+      <button class="modal-x" onclick="closeModal()">&#10005;</button>
     </div>
     <div class="modal-body">
       <div class="modal-left">
         <div class="modal-sec">
           <div class="modal-sec-ttl">Description / Context</div>
-          <textarea class="modal-desc" id="md-desc" placeholder="Goals, constraints, current state, key decisions…"></textarea>
+          <textarea class="modal-desc" id="md-desc" placeholder="Goals, sonstraints, current state, key decisions..."></textarea>
         </div>
         <div class="modal-sec">
           <div class="modal-sec-ttl">Paths (Tasks) &amp; Sub-paths</div>
@@ -264,71 +258,53 @@ header{height:52px;background:var(--surface);border-bottom:2px solid var(--amber
           <div class="modal-prog-bar"><div class="modal-prog-fill" id="md-prog-fill" style="width:0%"></div></div>
           <div id="md-checklist"></div>
           <div class="modal-add-task">
-            <input type="text" id="md-task-inp" placeholder="Add path…" onkeydown="if(event.key==='Enter')modalAddTask()">
+            <input type="text" id="md-task-inp" placeholder="Add path..." onkeydown="if(event.key==='Enter')modalAddTask()">
             <button onclick="modalAddTask()">Add Path</button>
           </div>
         </div>
       </div>
       <div class="modal-right">
-        <div class="prop-row">
-          <span class="prop-lbl">Stage</span>
+        <div class="prop-row"><span class="prop-lbl">Stage</span>
           <select class="prop-sel" id="md-stage">
-            <option value="ideas">Ideas</option>
-            <option value="discovery">Discovery</option>
-            <option value="todo">To-Do</option>
-            <option value="doing">Doing</option>
-            <option value="verify">Verify</option>
-            <option value="iterate">Iterate</option>
+            <option value="ideas">Ideas</option><option value="discovery">Discovery</option>
+            <option value="todo">To-Do</option><option value="doing">Doing</option>
+            <option value="verify">Verify</option><option value="iterate">Iterate</option>
             <option value="done">Done</option>
           </select>
         </div>
-        <div class="prop-row">
-          <span class="prop-lbl">Priority</span>
+        <div class="prop-row"><span class="prop-lbl">Priority</span>
           <select class="prop-sel" id="md-priority">
-            <option value="blocker">⛔ Blocker</option>
-            <option value="critical">🔥 Critical</option>
-            <option value="high">↑ High</option>
-            <option value="medium">→ Medium</option>
-            <option value="low">↓ Low</option>
-            <option value="none">— None</option>
+            <option value="blocker">Blocker</option><option value="critical">Critical</option>
+            <option value="high">High</option><option value="medium">Medium</option>
+            <option value="low'>Low</option><option value="none">None</option>
           </select>
         </div>
-        <div class="prop-row">
-          <span class="prop-lbl">Category</span>
+        <div class="prop-row"><span class="prop-lbl">Category</span>
           <select class="prop-sel" id="md-cat">
-            <option value="physical">🏠 Physical / RE</option>
-            <option value="business">💼 Business</option>
-            <option value="tech">⚡ Technology</option>
-            <option value="operations">⚙ Operations</option>
-            <option value="vision">🌟 Vision</option>
+            <option value="physical">Physical / RE</option><option value="business">Business</option>
+            <option value="tech">Technology</option><option value="operations">Operations</option>
+            <option value="vision">Vision</option>
           </select>
         </div>
-        <div class="prop-row">
-          <span class="prop-lbl">Due Date</span>
+        <div class="prop-row"><span class="prop-lbl">Due Date</span>
           <input class="prop-inp" type="date" id="md-due">
         </div>
-        <div class="prop-row">
-          <span class="prop-lbl">Effort</span>
+        <div class="prop-row"><span class="prop-lbl">Effort</span>
           <select class="prop-sel" id="md-effort">
-            <option value="">— Unset</option>
-            <option value="xs">XS – Tiny</option>
-            <option value="s">S – Small</option>
-            <option value="m">M – Medium</option>
-            <option value="l">L – Large</option>
-            <option value="xl">XL – Major</option>
+            <option value="">Unset</option><option value="xs">XS - Tiny</option>
+            <option value="s">S - Small</option><option value="m">M - Medium</option>
+            <option value="l">L - Large</option><option value="xl">XL - Major</option>
           </select>
         </div>
-        <div class="prop-row">
-          <span class="prop-lbl">Labels</span>
+        <div class="prop-row"><span class="prop-lbl">Labels</span>
           <div class="labels-grid" id="md-labels"></div>
         </div>
-        <div class="prop-row">
-          <span class="prop-lbl">Notion</span>
+        <div class="prop-row"><span class="prop-lbl">Notion</span>
           <div class="notion-links">
-            <a class="nlink" href="https://www.notion.so/36bf2dbb8b558131a0e8e3c2d18163a8" target="_blank" rel="noopener">📁 All Projects</a>
+            <a class="nlink" href="https://www.notion.so/36bf2dbb8b558131a0e8e3c2d18163a8" target="_blank" rel="noopener">&#128193; All Projects</a>
             <div id="nlink-proj"></div>
           </div>
-          <input class="nlink-inp" id="md-notion" placeholder="Paste project Notion URL…" type="url" oninput="updateNotionPreview()">
+          <input class="nlink-inp" id="md-notion" placeholder="Paste project Notion URL..." type="url" oninput="updateNotionPreview()">
         </div>
       </div>
     </div>
@@ -339,38 +315,32 @@ header{height:52px;background:var(--surface);border-bottom:2px solid var(--amber
     </div>
   </div>
 </div>
-
 <script>
-// ── CONSTANTS ──
 const STAGES=['ideas','discovery','todo','doing','verify','iterate','done'];
 const SLBL={ideas:'Ideas',discovery:'Discovery',todo:'To-Do',doing:'Doing',verify:'Verify',iterate:'Iterate',done:'Done'};
 const CC={physical:'#d97706',business:'#059669',tech:'#3b82f6',operations:'#ea580c',vision:'#7c3aed'};
 const CL={physical:'Physical/RE',business:'Business',tech:'Tech',operations:'Ops',vision:'Vision'};
-const CI={physical:'🏠',business:'💼',tech:'⚡',operations:'⚙',vision:'🌟'};
 const SC={ideas:'#a78bfa',discovery:'#34d399',todo:'#6ee7b7',doing:'#f59e0b',verify:'#f87171',iterate:'#fb923c',done:'#86efac'};
-const PC={blocker:'#ef4444',critical:'#f97316',high:'#eab308',medium:'#3b82f6',low:'#6b7280',none:'transparent'};
-const PL={blocker:'⛔ Blocker',critical:'🔥 Critical',high:'↑ High',medium:'→ Medium',low:'↓ Low',none:'— None'};
+const PC={blocker:'qef4444',critical:'#f97316',high:'#eab308',medium:'#3b82f6',low:'#6b7280',none:'transparent'};
 const EL={xs:'XS',s:'S',m:'M',l:'L',xl:'XL'};
 const LDEFS=[
-  {k:'urgent',  c:'#ef4444',bg:'#ef444420',lbl:'Urgent'},
-  {k:'blocked', c:'#f97316',bg:'#f9731620',lbl:'Blocked'},
-  {k:'revenue', c:'#10b981',bg:'#10b98120',lbl:'Revenue'},
+  {k:'urgent',c:'#ef4444',bg:'#ef444420',lbl:'Urgent'},
+  {k:'blocked',c:'#f97316',bg:'#f9731620',lbl:'Blocked'},
+  {k:'revenue',c:'#10b981',bg:'#10b98120',lbl:'Revenue'},
   {k:'research',c:'#8b5cf6',bg:'#8b5cf620',lbl:'Research'},
-  {k:'legal',   c:'#f59e0b',bg:'#f59e0b20',lbl:'Legal'},
-  {k:'build',   c:'#3b82f6',bg:'#3b82f620',lbl:'Build'},
+  {k:'legal',c:'#f59e0b',bg:'#f59e0b20',lbl:'Legal'},
+  {k:'build',c:'#3b82f6',bg:'#3b82f620',lbl:'Build'},
   {k:'personal',c:'#ec4899',bg:'#ec489920',lbl:'Personal'},
 ];
 const TG=[
-  {k:'physical', lbl:'Physical Assets', icon:'🏠'},
-  {k:'business', lbl:'Business',        icon:'💼'},
-  {k:'tech',     lbl:'Technology',      icon:'⚡'},
-  {k:'operations',lbl:'Operations',     icon:'⚙'},
-  {k:'vision',   lbl:'Vision',          icon:'🌟'},
+  {k:'physical',lbl:'Physical Assets',icon:'H'},
+  {k:'business',lbl:'Business',icon:'B'},
+  {k:'tech',lbl:'Technology',icon:'T'},
+  {k:'operations',lbl:'Operations',icon:'O'},
+  {k:'vision',lbl:'Vision',icon:'V'},
 ];
 const KEY='max_project_command_v3';
 const KEY2='max_project_command_v2';
-
-// ── SEED DATA ──
 const SEED=[
   {id:'p1',name:'Swann Drive Renovation',stage:'doing',cat:'physical',priority:'high',effort:'xl',dueDate:'',labels:['build'],notionUrl:'',
    ctx:'Asset repositioning. $100k HELOC under consideration. Target valuation ~$650k. DIY + contractor hybrid.',
@@ -378,7 +348,7 @@ const SEED=[
      {id:'t1a',text:'Evaluate HELOC options and lenders',done:false,subtasks:[]},
      {id:'t1b',text:'Finalize FLW prairie design direction',done:false,subtasks:[]},
      {id:'t1c',text:'Get structural assessment for addition scope',done:false,subtasks:[]},
-     {id:'t1d',text:'Sequence trades: demo → framing → MEP → finish',done:false,subtasks:[]}
+     {id:'t1d',text:'Sequence trades: demo then framing then MEP then finish',done:false,subtasks:[]}
    ]},
   {id:'p2',name:'Global Sourcing / Alibaba',stage:'discovery',cat:'operations',priority:'medium',effort:'m',dueDate:'',labels:['research'],notionUrl:'',
    ctx:'Windows, doors, fixtures, cabinetry, equipment. MOQ, CBM, DDP vs FOB vs EXW, landed cost, code compliance.',
@@ -395,7 +365,7 @@ const SEED=[
      {id:'t3c',text:'Review DSCR loan options for next purchase',done:false,subtasks:[]}
    ]},
   {id:'p4',name:'Business Acquisition',stage:'discovery',cat:'business',priority:'high',effort:'xl',dueDate:'',labels:['revenue','research'],notionUrl:'',
-   ctx:'SBA-eligible, cash-flowing local businesses, 10–40yr operating history, owner retiring. QoE, modernization upside.',
+   ctx:'SBA-eligible, cash-flowing local businesses, 10-40yr operating history, owner retiring. QoE, modernization upside.',
    tasks:[
      {id:'t4a',text:'Define screening criteria: revenue, margin, owner age, industry',done:false,subtasks:[]},
      {id:'t4b',text:'Identify 5 target businesses in Dalton/CHA area',done:false,subtasks:[]},
@@ -414,7 +384,7 @@ const SEED=[
    tasks:[
      {id:'t6a',text:'Implement floor plan persistence layer (IndexedDB)',done:false,subtasks:[]},
      {id:'t6b',text:'Add electrical panel schedule feature',done:false,subtasks:[]},
-     {id:'t6c',text:'Build shopping list → supplier integration',done:false,subtasks:[]},
+     {id:'t6c',text:'Build shopping list to supplier integration',done:false,subtasks:[]},
      {id:'t6d',text:'Service worker for offline-first mode',done:false,subtasks:[]}
    ]},
   {id:'p7',name:'AI Agent Architecture',stage:'doing',cat:'tech',priority:'critical',effort:'xl',dueDate:'',labels:['build','research'],notionUrl:'',
@@ -444,741 +414,332 @@ const SEED=[
    tasks:[]},
 ];
 
-// ── STATE ──
-let state={projects:[]};
-let editId=null;
-let dragId=null;
-let wasDrag=false;
-let activeFilters=new Set();
-let openStSections=new Set(); // task IDs whose sub-path sections are open in modal
+let state={projects:[],futureNodes:[]};
+let editId=null,dragId=null,wasDrag=false,editLabels=[];
+let activeFilters=new Set(),openStSections=new Set();
+const R_CAT=165,R_PROJ=360,R_TASK=555,R_ST=710;
+let expandedProjects=new Set(),expandedTasks=new Set();
+let mapScale=0.65,mapOffX=0,mapOffY=0,mapDragging=false;
+let mapDragSX=0,mapDragSY=0,mapDragOX=0,mapDragOY=0;
 
-// Mind map state
-const R_CAT=165, R_PROJ=360, R_TASK=555, R_ST=710;
-let expandedProjects=new Set();
-let expandedTasks=new Set();
-let mapScale=0.65;
-let mapOffX=0, mapOffY=0;
-let mapDragging=false;
-let mapDragSX=0, mapDragSY=0, mapDragOX=0, mapDragOY=0;
-let mmInited=false;
-
-// ── DATA HELPERS ──
-function defaults(p){
-  const base={priority:'medium',effort:'',dueDate:'',labels:[],notionUrl:'',archived:false,
-    createdAt:Date.now(),updatedAt:Date.now(),...p};
-  // Ensure every task has subtasks array
-  base.tasks=(base.tasks||[]).map(t=>({subtasks:[],...t}));
-  return base;
-}
-
-function load(){
-  try{
-    const r=localStorage.getItem(KEY);
-    if(r){state=JSON.parse(r);state.projects=state.projects.map(p=>defaults(p));}
-    else{
-      const r2=localStorage.getItem(KEY2);
-      if(r2){const o=JSON.parse(r2);state={projects:o.projects.map(p=>defaults(p))};}
-      else{state={projects:JSON.parse(JSON.stringify(SEED)).map(p=>defaults(p))};}
-      save();
-    }
-  }catch(e){state={projects:JSON.parse(JSON.stringify(SEED)).map(p=>defaults(p))};}
-}
+function uid(){return 't'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);}
+function today(){return new Date().toISOString().slice(0,10);}
+function escHtml(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 
 function save(){
-  localStorage.setItem(KEY,JSON.stringify(state));
-  const el=document.getElementById('saved-time');
-  if(el)el.textContent='Saved '+new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  try{
+    localStorage.setItem(KEY,JSON.stringify({projects:state.projects,futureNodes:state.futureNodes||[]}));
+    const t=document.getElementById('saved-time');
+    if(t) t.textContent='Saved '+new Date().toLocaleTimeString();
+  }catch(e){}
+}
+function ensureP(p){
+  if(!p.tasks)p.tasks=[];
+  p.tasks.forEach(t=>{if(!t.subtasks)t.subtasks=[];});
+  if(!p.labels)p.labels=[];
+  return p;
+}
+function load(){
+  try{
+    const raw=localStorage.getItem(KEY);
+    if(!raw){
+      const r2=localStorage.getItem(KEY2);
+      if(r2){const o=JSON.parse(r2);state.projects=(o.projects||o||[]).map(ensureP);state.futureNodes=[];save();return;}
+      state.projects=JSON.parse(JSON.stringify(SEED)).map(ensureP);state.futureNodes=[];save();return;
+    }
+    const d=JSON.parse(raw);
+    state.projects=(d.projects||[]).map(ensureP);
+    state.futureNodes=d.futureNodes||[];
+  }catch(e){state.projects=JSON.parse(JSON.stringify(SEED)).map(ensureP);state.futureNodes=[];}
 }
 
-// ── FILTERS ──
-function toggleFilter(k){
-  if(activeFilters.has(k))activeFilters.delete(k);else activeFilters.add(k);
-  document.querySelectorAll('.fc').forEach(c=>c.classList.toggle('on',activeFilters.has(c.id.replace('fc-',''))));
+function setView(v){
+  document.querySelectorAll('.view').forEach(el=>el.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(el=>el.classList.remove('on'));
+  document.getElementById(v).classList.add('on');
+  document.querySelectorAll('.tab').forEach(el=>{
+    if((v==='board'&&el.textContent.includes('Board'))||(v==='tree'&&el.textContent.includes('Mind')))el.classList.add('on');
+  });
+  if(v==='tree') drawMap();
+}
+
+function updateStats(){
+  const ps=state.projects;
+  document.getElementById('s-future').textContent=(state.futureNodes||[]).length;
+  document.getElementById('s-doing').textContent=ps.filter(p=>p.stage==='doing').length;
+  document.getElementById('s-disc').textContent=ps.filter(p=>p.stage==='discovery').length;
+  document.getElementById('s-ideas').textContent=ps.filter(p=>p.stage==='ideas').length;
+  document.getElementById('s-done').textContent=ps.filter(p=>p.stage==='done').length;
+  document.getElementById('s-high').textContent=ps.filter(p=>['blocker','critical','high'].includes(p.priority)).length;
+  document.getElementById('s-tasks').textContent=ps.reduce((a,p)=>a+p.tasks.filter(t=>!t.done).length,0);
+  document.getElementById('s-subtasks').textContent=ps.reduce((a,p)=>a+p.tasks.reduce((b,t)=>b+(t.subtasks||[]).filter(s=>!s.done).length,0),0);
+}
+
+function toggleFilter(f){
+  if(activeFilters.has(f))activeFilters.delete(f);else activeFilters.add(f);
+  document.getElementById('fc-'+f).classList.toggle('on',activeFilters.has(f));
   renderBoard();
 }
-
-function matchFilters(p){
-  const q=(document.getElementById('fsearch')?.value||'').toLowerCase().trim();
+function filterMatch(p){
+  const q=(document.getElementById('fsearch').value||'').toLowerCase();
   if(q&&!p.name.toLowerCase().includes(q)&&!(p.ctx||'').toLowerCase().includes(q))return false;
-  if(!activeFilters.size)return true;
-  const today=new Date();today.setHours(0,0,0,0);
   for(const f of activeFilters){
-    if(f==='overdue'){if(!p.dueDate)return false;const d=new Date(p.dueDate);d.setHours(0,0,0,0);if(d>=today)return false;}
+    if(f==='overdue'){if(!p.dueDate||p.dueDate>=today())return false;}
     else if(['blocker','critical','high','medium','low'].includes(f)){if(p.priority!==f)return false;}
     else if(['physical','business','tech','operations','vision'].includes(f)){if(p.cat!==f)return false;}
   }
   return true;
 }
 
-// ── STATS ──
-function updateStats(){
-  const p=state.projects.filter(x=>!x.archived);
-  document.getElementById('s-doing').textContent=p.filter(x=>x.stage==='doing').length;
-  document.getElementById('s-disc').textContent=p.filter(x=>x.stage==='discovery').length;
-  document.getElementById('s-ideas').textContent=p.filter(x=>x.stage==='ideas').length;
-  document.getElementById('s-done').textContent=p.filter(x=>x.stage==='done').length;
-  document.getElementById('s-high').textContent=p.filter(x=>['blocker','critical','high'].includes(x.priority)).length;
-  document.getElementById('s-tasks').textContent=p.reduce((n,x)=>n+(x.tasks||[]).filter(t=>!t.done).length,0);
-  const stEl=document.getElementById('s-subtasks');
-  if(stEl)stEl.textContent=p.reduce((n,x)=>n+(x.tasks||[]).reduce((m,t)=>m+(t.subtasks||[]).filter(s=>!s.done).length,0),0);
-}
-
-// ── BOARD ──
 function renderBoard(){
   const board=document.getElementById('board');
-  board.innerHTML='';
-  const active=state.projects.filter(p=>!p.archived);
-  STAGES.forEach(stage=>{
-    const all=active.filter(p=>p.stage===stage);
-    const vis=all.filter(p=>matchFilters(p));
-    const col=document.createElement('div');
-    col.className='col';col.dataset.col=stage;
-    col.innerHTML=`<div class="col-head"><span class="col-title">${SLBL[stage]}</span><span class="col-cnt">${vis.length}${vis.length!==all.length?'/'+all.length:''}</span></div>
-      <div class="col-body" id="col-${stage}" ondragover="onDragOver(event,'${stage}')" ondragleave="onDragLeave(event,'${stage}')" ondrop="onDrop(event,'${stage}')">
-        ${vis.map(p=>cardHTML(p)).join('')}
-        <button class="add-card-btn" onclick="openNewCard('${stage}')">＋ Add project</button>
-      </div>`;
-    board.appendChild(col);
-  });
-  updateStats();
-}
-
-function cardHTML(p){
-  const cc=CC[p.cat]||'#888';
-  const pc2=PC[p.priority||'none']||'transparent';
-  const tasks=p.tasks||[];
-  const doneC=tasks.filter(t=>t.done).length;
-  const tot=tasks.length;
-  const pct=tot?Math.round(doneC/tot*100):0;
-  const stTot=tasks.reduce((n,t)=>n+(t.subtasks||[]).length,0);
-  const stDone=tasks.reduce((n,t)=>n+(t.subtasks||[]).filter(s=>s.done).length,0);
-  const lbls=(p.labels||[]).map(l=>{const d=LDEFS.find(x=>x.k===l);return d?`<span class="lchip" style="background:${d.bg};color:${d.c}">${d.lbl}</span>`:''}).join('');
-  let due='';
-  if(p.dueDate){
-    const today=new Date();today.setHours(0,0,0,0);
-    const d=new Date(p.dueDate);d.setHours(0,0,0,0);
-    const diff=Math.round((d-today)/864e5);
-    const fmt=new Date(p.dueDate).toLocaleDateString([],{month:'short',day:'numeric'});
-    due=diff<0?`<span class="due-badge overdue">⚠ ${fmt}</span>`:diff<=7?`<span class="due-badge soon">📅 ${fmt}</span>`:`<span class="due-badge">📅 ${fmt}</span>`;
+  let html=renderFutureColumn();
+  for(const st of STAGES){
+    const ps=state.projects.filter(p=>p.stage===st&&filterMatch(p));
+    html+=`<div class="col" data-col="${st}" ondragover="event.preventDefault();this.querySelector('.col-body').classList.add('over')" ondragleave="this.querySelector('.col-body').classList.remove('over')" ondrop="dropCol(event,'${st}')"><div class="col-head"><span class="col-title">${SLBL[st]}</span><span class="col-cnt">${ps.length}</span></div><div class="col-body" id="colbody-${st}">${ps.map(p=>renderCard(p)).join('')}<button class="add-card-btn" onclick="openNewCard('${st}')">+ Add Project</button></div></div>`;
   }
-  const eff=p.effort?`<span class="eff-badge">${EL[p.effort]||p.effort}</span>`:'';
-  const stBadge=stTot?`<span class="eff-badge" title="Sub-paths">${stDone}/${stTot} sub</span>`:'';
-  return `<div class="card" id="card-${p.id}" draggable="true" ondragstart="onDragStart(event,'${p.id}')" ondragend="onDragEnd(event,'${p.id}')">
-    <div class="card-cover" style="background:${cc}"></div>
-    <div class="card-body" onclick="if(!wasDrag)openCard('${p.id}')">
-      <div class="card-title-row">
-        <div class="pri-dot" style="background:${pc2}" title="${PL[p.priority]||''}"></div>
-        <div class="card-name">${esc(p.name)}</div>
-      </div>
-      ${lbls?`<div class="card-labels">${lbls}</div>`:''}
-      ${p.ctx?`<div class="card-ctx">${esc((p.ctx||'').slice(0,80))}${(p.ctx||'').length>80?'…':''}</div>`:''}
-      ${tot?`<div class="prog-wrap"><div class="prog-lbl"><span>${doneC}/${tot} paths${stBadge?' · '+stBadge:''}</span><span>${pct}%</span></div><div class="prog-bar"><div class="prog-fill" id="pf-${p.id}" style="width:${pct}%;background:${pct===100?'#10b981':'var(--amber)'}"></div></div></div>`:''}
-      <div class="card-foot">
-        <div class="card-foot-left">
-          <span class="cat-badge" style="background:${cc}22;color:${cc}">${CI[p.cat]||''} ${CL[p.cat]||p.cat}</span>
-          ${due}${eff}
-        </div>
-        <button class="icon-btn" onclick="togglePanel(event,'${p.id}')" title="Paths">☑</button>
-      </div>
-    </div>
-    <div class="tasks" id="tasks-${p.id}">
-      ${tasks.map(t=>tRowHTML(p.id,t)).join('')}
-      <div class="add-task">
-        <input type="text" id="ti-${p.id}" placeholder="Quick add path…" onkeydown="if(event.key==='Enter')quickAdd('${p.id}')">
-        <button onclick="quickAdd('${p.id}')">+</button>
-      </div>
-    </div>
-  </div>`;
-}
-
-function tRowHTML(pid,t){
-  return `<div class="task-row${t.done?' done':''}" id="tr-${t.id}">
-    <input type="checkbox" id="tc-${t.id}" ${t.done?'checked':''} onchange="toggleTask('${pid}','${t.id}')">
-    <label for="tc-${t.id}">${esc(t.text)}</label>
-    <button class="task-del" onclick="delTaskCard('${pid}','${t.id}')">✕</button>
-  </div>`;
-}
-
-function togglePanel(e,pid){e.stopPropagation();const el=document.getElementById('tasks-'+pid);if(el)el.classList.toggle('open');}
-
-function toggleTask(pid,tid){
-  const p=state.projects.find(x=>x.id===pid);if(!p)return;
-  const t=p.tasks.find(x=>x.id===tid);if(t)t.done=!t.done;
-  save();
-  const tr=document.getElementById('tr-'+tid);if(tr)tr.classList.toggle('done',t.done);
-  const cb=document.getElementById('tc-'+tid);if(cb)cb.checked=t.done;
-  const tasks=p.tasks;const dc=tasks.filter(x=>x.done).length;const tot=tasks.length;
-  const pct=tot?Math.round(dc/tot*100):0;
-  const fill=document.getElementById('pf-'+pid);
-  if(fill){fill.style.width=pct+'%';fill.style.background=pct===100?'#10b981':'var(--amber)';}
+  board.innerHTML=html;
   updateStats();
 }
 
-function quickAdd(pid){
-  const inp=document.getElementById('ti-'+pid);if(!inp)return;
-  const txt=inp.value.trim();if(!txt)return;
-  const p=state.projects.find(x=>x.id===pid);if(!p)return;
-  p.tasks.push({id:'t'+Date.now(),text:txt,done:false,subtasks:[]});
-  save();renderBoard();
-  setTimeout(()=>{const el=document.getElementById('tasks-'+pid);if(el)el.classList.add('open');const ni=document.getElementById('ti-'+pid);if(ni)ni.focus();},0);
+function renderFutureColumn(){
+  const fns=state.futureNodes||[];
+  const cards=fns.map(fn=>`<div class="fn-card"><div class="fn-card-title">${escHtml(fn.title)}</div>${fn.note?`<div class="fn-card-note">${escHtml(fn.note)}</div>`:''}<div class="fn-card-foot"><span class="fn-date">${fn.createdAt||''}</span><div style="display:flex;gap:4px"><button class="fn-promote-btn" onclick="promoteFutureNode('${fn.id}')">&#8594; Ideas</button><button class="fn-del-btn" onclick="deleteFutureNode('${fn.id}')">&#10005;</button></div></div></div>`).join('');
+  return `<div class="col" data-col="future"><div class="col-head"><span class="col-title">Future Nodes</span><span class="col-cnt">${fns.length}</span></div><div class="col-body" id="colbody-future">${cards}<div class="fn-add-form"><input class="fn-inp" id="fn-title-inp" placeholder="Capture an idea..." onkeydown="if(event.key==='Enter')addFutureNode()"><input class="fn-inp" id="fn-note-inp" placeholder="Note (optional)" onkeydown="if(event.key==='Enter')addFutureNode()"><button class="fn-add-btn" onclick="addFutureNode()">+ Add Node</button></div></div></div>`;
+}
+function addFutureNode(){
+  const ti=document.getElementById('fn-title-inp'),ni=document.getElementById('fn-note-inp');
+  const title=(ti.value||'').trim();if(!title)return;
+  if(!state.futureNodes)state.futureNodes=[];
+  state.futureNodes.unshift({id:uid(),title,note:(ni.value||'').trim(),createdAt:today()});
+  ti.value='';ni.value='';save();renderBoard();
+}
+function deleteFutureNode(id){
+  state.futureNodes=(state.futureNodes||[]).filter(fn=>fn.id!==id);save();renderBoard();
+}
+function promoteFutureNode(id){
+  const fn=(state.futureNodes||[]).find(fn=>fn.id===id);if(!fn)return;
+  state.projects.unshift({id:uid(),name:fn.title,stage:'ideas',cat:'tech',priority:'none',effort:'',dueDate:'',labels:[],notionUrl:'',ctx:fn.note||'',tasks:[]});
+  state.futureNodes=(state.futureNodes||[]).filter(fn=>fn.id!==id);save();renderBoard();
 }
 
-function delTaskCard(pid,tid){
-  const p=state.projects.find(x=>x.id===pid);if(!p)return;
-  p.tasks=p.tasks.filter(t=>t.id!==tid);
-  save();renderBoard();
-  setTimeout(()=>{const el=document.getElementById('tasks-'+pid);if(el)el.classList.add('open');},0);
+function renderCard(p){
+  const td=p.tasks.filter(t=>t.done).length,tt=p.tasks.length;
+  const pct=tt?Math.round(td/tt*100):0;
+  const catCol=CC[p.cat]||'#666',priCol=PC[p.priority]||'transparent';
+  const labHtml=(p.labels||[]).map(lk=>{const ld=LDEFS.find(l=>l.k===lk);return ld?`<span class="lchip" style="background:${ld.bg};color:${ld.c}">${ld.lbl}</span>`:''}).join('');
+  let dueHtml='';
+  if(p.dueDate){const s7=new Date(Date.now()+7*864e5).toISOString().slice(0,10);const cls=p.dueDate<today()?'overdue':p.dueDate<=s7?'soon':'';dueHtml=`<span class="due-badge ${cls}">${p.dueDate}</span>`;}
+  const effHtml=p.effort?`<span class="eff-badge">${EL[p.effort]||p.effort}</span>`:'';
+  const taskRows=p.tasks.map(t=>`<div class="task-row ${t.done?'done':''}"><input type="checkbox" ${t.done?'checked':''} onchange="inlineToggleTask('${p.id}','${t.id}')"><label>${escHtml(t.text)}</label></div>`).join('');
+  const progHtml=tt?`<div class="prog-wrap"><div class="prog-lbl"><span>${td}/${tt} paths</span><span>${pct}%</span></div><div class="prog-bar"><div class="prog-fill" style="width:${pct}%;background:${catCol}"></div></div></div>`:'';
+  return `<div class="card" id="card-${p.id}" draggable="true" data-id="${p.id}" ondragstart="dragStart(event)" ondragend="dragEnd(event)" onclick="cardClick(event,'${p.id}')"><div class="card-cover" style="background:${catCol}"></div><div class="card-body"><div class="card-title-row"><div class="pri-dot" style="background:${priCol}"></div><div class="card-name">${escHtml(p.name)}</div><button class="icon-btn" onclick="event.stopPropagation();toggleCardTasks('${p.id}')">&#8801;</button></div>${labHtml?`<div class="card-labels">${labHtml}</div>`:''}${p.ctx?`<div class="card-ctx">${escHtml((p.ctx||'').slice(0,120))}${(p.ctx||'').length>120?'...':''}</div>`:''}${progHtml}<div class="card-foot"><div class="card-foot-left"><span class="cat-badge" style="background:${catCol}20;color:${catCol}">${CL[p.cat]||p.cat}</span>${dueHtml}${effHtml}</div></div></div><div class="tasks" id="tasks-${p.id}">${taskRows}<div class="add-task"><input type="text" id="atinp-${p.id}" placeholder="Quick path..." onkeydown="if(event.key==='Enter')quickAddTask('${p.id}')"><button onclick="quickAddTask('${p.id}')">+</button></div></div></div>`;
 }
+function toggleCardTasks(id){const el=document.getElementById('tasks-'+id);if(el)el.classList.toggle('open');}
+function cardClick(e,id){if(e.target.tagName==='INPUT'||e.target.tagName==='BUTTON'||e.target.tagName==='LABEL')return;if(wasDrag){wasDrag=false;return;}openCard(id);}
+function dragStart(e){dragId=e.currentTarget.dataset.id;setTimeout(()=>{const el=document.getElementById('card-'+dragId);if(el)el.classList.add('dragging');},0);}
+function dragEnd(e){wasDrag=true;e.currentTarget.classList.remove('dragging');document.querySelectorAll('.col-body').forEach(c=>c.classList.remove('over'));setTimeout(()=>{wasDrag=false;},120);}
+function dropCol(e,stage){e.preventDefault();document.querySelectorAll('.col-body').forEach(c=>c.classList.remove('over'));if(!dragId)return;const p=state.projects.find(p=>p.id===dragId);if(p&&p.stage!==stage){p.stage=stage;save();renderBoard();}dragId=null;}
+function quickAddTask(pid){const inp=document.getElementById('atinp-'+pid);const text=(inp.value||'').trim();if(!text)return;const p=state.projects.find(p=>p.id===pid);if(!p)return;p.tasks.push({id:uid(),text,done:false,subtasks:[]});inp.value='';save();renderBoard();}
+function inlineToggleTask(pid,tid){const p=state.projects.find(p=>p.id===pid);if(!p)return;const t=p.tasks.find(t=>t.id===tid);if(t){t.done=!t.done;save();renderBoard();}}
 
-// ── DRAG & DROP ──
-function onDragStart(e,pid){
-  dragId=pid;wasDrag=true;
-  setTimeout(()=>{const el=document.getElementById('card-'+pid);if(el)el.classList.add('dragging');},0);
-  e.dataTransfer.effectAllowed='move';
-}
-function onDragEnd(e,pid){
-  const el=document.getElementById('card-'+pid);if(el)el.classList.remove('dragging');
-  dragId=null;
-  setTimeout(()=>{wasDrag=false;},100);
-  document.querySelectorAll('.col-body').forEach(c=>c.classList.remove('over'));
-}
-function onDragOver(e,stage){
-  e.preventDefault();e.dataTransfer.dropEffect='move';
-  document.querySelectorAll('.col-body').forEach(c=>c.classList.remove('over'));
-  const el=document.getElementById('col-'+stage);if(el)el.classList.add('over');
-}
-function onDragLeave(e,stage){const el=document.getElementById('col-'+stage);if(el)el.classList.remove('over');}
-function onDrop(e,stage){
-  e.preventDefault();
-  document.querySelectorAll('.col-body').forEach(c=>c.classList.remove('over'));
-  if(!dragId)return;
-  const p=state.projects.find(x=>x.id===dragId);
-  if(p&&p.stage!==stage){p.stage=stage;save();renderBoard();}
-}
-
-// ── MODAL ──
 function openNewCard(stage){
-  editId=null;openStSections.clear();
-  document.getElementById('md-title').value='';
-  document.getElementById('md-desc').value='';
-  document.getElementById('md-stage').value=stage||'doing';
-  document.getElementById('md-priority').value='medium';
-  document.getElementById('md-cat').value='physical';
-  document.getElementById('md-due').value='';
-  document.getElementById('md-effort').value='';
-  document.getElementById('md-notion').value='';
+  editId=null;editLabels=[];
+  ['md-title','md-desc','md-notion'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('md-stage').value=stage||'ideas';
+  document.getElementById('md-priority').value='none';
+  document.getElementById('md-cat').value='tech';
+  document.getElementById('md-due').value='';document.getElementById('md-effort').value='';
+  document.getElementById('md-prog-lbl').textContent='No paths yet';
+  document.getElementById('md-prog-fill').style.width='0%';
+  document.getElementById('md-checklist').innerHTML='';document.getElementById('nlink-proj').innerHTML='';
   document.getElementById('md-type').textContent='New Project';
-  document.getElementById('nlink-proj').innerHTML='';
-  renderModalLabels([]);
-  renderModalChecklist([]);
-  updateModalProg([]);
-  document.getElementById('overlay').classList.add('on');
+  renderLabelGrid();document.getElementById('overlay').classList.add('on');
   setTimeout(()=>document.getElementById('md-title').focus(),50);
 }
-
-function openCard(pid){
-  const p=state.projects.find(x=>x.id===pid);if(!p)return;
-  editId=pid;openStSections.clear();
-  document.getElementById('md-type').textContent=(CI[p.cat]||'')+' '+(CL[p.cat]||'Project');
-  document.getElementById('md-title').value=p.name;
-  document.getElementById('md-desc').value=p.ctx||'';
-  document.getElementById('md-stage').value=p.stage;
-  document.getElementById('md-priority').value=p.priority||'medium';
-  document.getElementById('md-cat').value=p.cat;
-  document.getElementById('md-due').value=p.dueDate||'';
-  document.getElementById('md-effort').value=p.effort||'';
-  document.getElementById('md-notion').value=p.notionUrl||'';
-  renderModalLabels(p.labels||[]);
-  renderModalChecklist(p.tasks||[]);
-  updateModalProg(p.tasks||[]);
-  const wrap=document.getElementById('nlink-proj');
-  wrap.innerHTML=p.notionUrl?`<a class="nlink" href="${esc(p.notionUrl)}" target="_blank" rel="noopener">📄 ${esc(p.name)}</a>`:'';
+function openCard(id){
+  const p=state.projects.find(p=>p.id===id);if(!p)return;
+  editId=id;editLabels=[...(p.labels||[])];openStSections=new Set();
+  document.getElementById('md-type').textContent=CL[p.cat]||'Project';
+  document.getElementById('md-title').value=p.name||'';document.getElementById('md-desc').value=p.ctx||'';
+  document.getElementById('md-stage').value=p.stage||'ideas';document.getElementById('md-priority').value=p.priority||'none';
+  document.getElementById('md-cat').value=p.cat||'tech';document.getElementById('md-due').value=p.dueDate||'';
+  document.getElementById('md-effort').value=p.effort||'';document.getElementById('md-notion').value=p.notionUrl||'';
+  renderModalChecklist(p);renderLabelGrid();updateNotionPreview();
   document.getElementById('overlay').classList.add('on');
 }
-
-function updateNotionPreview(){
-  const url=document.getElementById('md-notion').value.trim();
-  const name=document.getElementById('md-title').value||'Project';
-  const wrap=document.getElementById('nlink-proj');
-  wrap.innerHTML=url?`<a class="nlink" href="${esc(url)}" target="_blank" rel="noopener">📄 ${esc(name)}</a>`:'';
-}
-
-function renderModalLabels(active){
-  document.getElementById('md-labels').innerHTML=LDEFS.map(l=>{
-    const on=active.includes(l.k);
-    return `<button class="ltog${on?' on':''}" data-k="${l.k}"
-      style="border-color:${on?l.c:''};color:${on?l.c:'var(--muted)'};background:${on?l.bg:'var(--bg)'}"
-      onclick="toggleLbl(this,'${l.k}','${l.c}','${l.bg}')">${l.lbl}</button>`;
-  }).join('');
-}
-
-function toggleLbl(btn,k,c,bg){
-  btn.classList.toggle('on');
-  const on=btn.classList.contains('on');
-  btn.style.borderColor=on?c:'';btn.style.color=on?c:'var(--muted)';btn.style.background=on?bg:'var(--bg)';
-}
-
-function getLabels(){
-  return Array.from(document.querySelectorAll('#md-labels .ltog.on')).map(b=>b.dataset.k).filter(Boolean);
-}
-
-function renderModalChecklist(tasks){
-  document.getElementById('md-checklist').innerHTML=tasks.map(t=>{
-    const subtasks=t.subtasks||[];
-    const stDone=subtasks.filter(s=>s.done).length;
-    const isOpen=openStSections.has(t.id);
-    return `<div class="modal-task-wrap">
-      <div class="modal-task-row${t.done?' done':''}" id="mtr-${t.id}">
-        <input type="checkbox" id="mtc-${t.id}" ${t.done?'checked':''} onchange="modalToggleTask('${t.id}')">
-        <label for="mtc-${t.id}">${esc(t.text)}</label>
-        ${editId?`<button class="modal-st-toggle" onclick="toggleStSection('${t.id}')" title="Sub-paths">${isOpen?'▾':'▸'} ${subtasks.length}${subtasks.length?` · ${stDone}✓`:''} sub</button>`:''}
-        <button class="modal-task-del" onclick="modalDelTask('${t.id}')">✕</button>
-      </div>
-      ${editId?`<div class="modal-st-section" id="sts-${t.id}" style="display:${isOpen?'block':'none'}">
-        ${subtasks.map(st=>`
-        <div class="modal-st-row${st.done?' done':''}" id="mstr-${st.id}">
-          <input type="checkbox" id="mstc-${st.id}" ${st.done?'checked':''} onchange="modalToggleSubTask('${t.id}','${st.id}')">
-          <label for="mstc-${st.id}">${esc(st.text)}</label>
-          <button class="modal-st-del" onclick="modalDelSubTask('${t.id}','${st.id}')">✕</button>
-        </div>`).join('')}
-        <div class="modal-add-st">
-          <input type="text" id="sti-${t.id}" placeholder="Add sub-path…" onkeydown="if(event.key==='Enter')modalAddSubTask('${t.id}')">
-          <button onclick="modalAddSubTask('${t.id}')">+</button>
-        </div>
-      </div>`:''}
-    </div>`;
-  }).join('');
-}
-
-function toggleStSection(tid){
-  if(openStSections.has(tid))openStSections.delete(tid);else openStSections.add(tid);
-  const el=document.getElementById('sts-'+tid);
-  if(el)el.style.display=openStSections.has(tid)?'block':'none';
-  // Update toggle button arrow
-  const btn=document.querySelector(`#mtr-${tid} .modal-st-toggle`);
-  if(btn){
-    const p=state.projects.find(x=>x.id===editId);
-    const t=p?.tasks.find(x=>x.id===tid);
-    const subtasks=t?.subtasks||[];
-    const stDone=subtasks.filter(s=>s.done).length;
-    btn.textContent=`${openStSections.has(tid)?'▾':'▸'} ${subtasks.length}${subtasks.length?` · ${stDone}✓`:''} sub`;
-  }
-}
-
-function updateModalProg(tasks){
-  const done=tasks.filter(t=>t.done).length;const tot=tasks.length;
-  const stTot=tasks.reduce((n,t)=>n+(t.subtasks||[]).length,0);
-  const stDone=tasks.reduce((n,t)=>n+(t.subtasks||[]).filter(s=>s.done).length,0);
-  const pct=tot?Math.round(done/tot*100):0;
-  const lbl=document.getElementById('md-prog-lbl');
-  const fill=document.getElementById('md-prog-fill');
-  if(lbl)lbl.textContent=tot?`${done}/${tot} paths done (${pct}%)${stTot?' · '+stDone+'/'+stTot+' sub-paths':''}`:'No paths yet';
-  if(fill){fill.style.width=pct+'%';fill.style.background=pct===100?'#10b981':'var(--amber)';}
-}
-
-function modalToggleTask(tid){
-  if(!editId)return;
-  const p=state.projects.find(x=>x.id===editId);if(!p)return;
-  const t=p.tasks.find(x=>x.id===tid);if(t){t.done=!t.done;save();}
-  const row=document.getElementById('mtr-'+tid);if(row)row.classList.toggle('done',t.done);
-  updateModalProg(p.tasks);
-}
-
-function modalDelTask(tid){
-  if(!editId)return;
-  const p=state.projects.find(x=>x.id===editId);if(!p)return;
-  p.tasks=p.tasks.filter(t=>t.id!==tid);
-  openStSections.delete(tid);
-  save();
-  renderModalChecklist(p.tasks);updateModalProg(p.tasks);
-}
-
-function modalAddTask(){
-  const inp=document.getElementById('md-task-inp');if(!inp)return;
-  const txt=inp.value.trim();if(!txt)return;inp.value='';
-  if(editId){
-    const p=state.projects.find(x=>x.id===editId);if(!p)return;
-    p.tasks.push({id:'t'+Date.now(),text:txt,done:false,subtasks:[]});save();
-    renderModalChecklist(p.tasks);updateModalProg(p.tasks);
-  } else {
-    const tid='t'+Date.now();
-    const list=document.getElementById('md-checklist');
-    const div=document.createElement('div');
-    div.className='modal-task-wrap';
-    div.innerHTML=`<div class="modal-task-row" id="mtr-${tid}"><input type="checkbox" id="mtc-${tid}"><label for="mtc-${tid}">${esc(txt)}</label><button class="modal-task-del" onclick="this.closest('.modal-task-wrap').remove()">✕</button></div>`;
-    list.appendChild(div);
-  }
-  inp.focus();
-}
-
-function modalToggleSubTask(tid,stid){
-  if(!editId)return;
-  const p=state.projects.find(x=>x.id===editId);if(!p)return;
-  const t=p.tasks.find(x=>x.id===tid);if(!t)return;
-  const st=(t.subtasks||[]).find(x=>x.id===stid);if(!st)return;
-  st.done=!st.done;save();
-  const row=document.getElementById('mstr-'+stid);
-  if(row)row.classList.toggle('done',st.done);
-  updateModalProg(p.tasks);
-  // Update sub-path toggle button count
-  const btn=document.querySelector(`#mtr-${tid} .modal-st-toggle`);
-  if(btn){const subtasks=t.subtasks||[];const stDone=subtasks.filter(s=>s.done).length;btn.textContent=`${openStSections.has(tid)?'▾':'▸'} ${subtasks.length}${subtasks.length?` · ${stDone}✓`:''} sub`;}
-}
-
-function modalDelSubTask(tid,stid){
-  if(!editId)return;
-  const p=state.projects.find(x=>x.id===editId);if(!p)return;
-  const t=p.tasks.find(x=>x.id===tid);if(!t)return;
-  t.subtasks=(t.subtasks||[]).filter(s=>s.id!==stid);save();
-  const row=document.getElementById('mstr-'+stid);if(row)row.remove();
-  updateModalProg(p.tasks);
-  const btn=document.querySelector(`#mtr-${tid} .modal-st-toggle`);
-  if(btn){const subtasks=t.subtasks||[];const stDone=subtasks.filter(s=>s.done).length;btn.textContent=`${openStSections.has(tid)?'▾':'▸'} ${subtasks.length}${subtasks.length?` · ${stDone}✓`:''} sub`;}
-}
-
-function modalAddSubTask(tid){
-  if(!editId)return;
-  const inp=document.getElementById('sti-'+tid);if(!inp)return;
-  const txt=inp.value.trim();if(!txt)return;inp.value='';
-  const p=state.projects.find(x=>x.id===editId);if(!p)return;
-  const t=p.tasks.find(x=>x.id===tid);if(!t)return;
-  if(!t.subtasks)t.subtasks=[];
-  t.subtasks.push({id:'st'+Date.now(),text:txt,done:false});
-  save();
-  openStSections.add(tid);
-  renderModalChecklist(p.tasks);
-  updateModalProg(p.tasks);
-  setTimeout(()=>{const ni=document.getElementById('sti-'+tid);if(ni)ni.focus();},10);
-}
-
-function closeModal(){
-  document.getElementById('overlay').classList.remove('on');
-  editId=null;openStSections.clear();
-  renderBoard();
-  if(document.getElementById('tree').classList.contains('on'))renderMindMap();
-}
+function closeModal(){document.getElementById('overlay').classList.remove('on');editId=null;}
 function overlayBg(e){if(e.target===document.getElementById('overlay'))closeModal();}
-
 function saveModal(){
-  const name=document.getElementById('md-title').value.trim();
-  if(!name){document.getElementById('md-title').focus();return;}
-  const stage=document.getElementById('md-stage').value;
-  const priority=document.getElementById('md-priority').value;
-  const cat=document.getElementById('md-cat').value;
-  const ctx=document.getElementById('md-desc').value.trim();
-  const dueDate=document.getElementById('md-due').value;
-  const effort=document.getElementById('md-effort').value;
-  const labels=getLabels();
-  const notionUrl=document.getElementById('md-notion').value.trim();
+  const name=document.getElementById('md-title').value.trim();if(!name)return;
   if(editId){
-    const p=state.projects.find(x=>x.id===editId);
-    if(p)Object.assign(p,{name,stage,priority,cat,ctx,dueDate,effort,labels,notionUrl,updatedAt:Date.now()});
-  } else {
-    const taskEls=document.querySelectorAll('#md-checklist .modal-task-wrap');
-    const tasks=Array.from(taskEls).map(el=>{
-      const lbl=el.querySelector('label');const cb=el.querySelector('input[type=checkbox]');
-      const id=el.querySelector('[id^="mtr-"]')?.id?.replace('mtr-','');
-      return {id:id||'t'+Date.now(),text:lbl?.textContent||'',done:cb?.checked||false,subtasks:[]};
-    }).filter(t=>t.text);
-    state.projects.push(defaults({id:'p'+Date.now(),name,stage,priority,cat,ctx,dueDate,effort,labels,notionUrl,tasks}));
+    const p=state.projects.find(p=>p.id===editId);if(!p)return;
+    p.name=name;p.ctx=document.getElementById('md-desc').value;
+    p.stage=document.getElementById('md-stage').value;p.priority=document.getElementById('md-priority').value;
+    p.cat=document.getElementById('md-cat').value;p.dueDate=document.getElementById('md-due').value;
+    p.effort=document.getElementById('md-effort').value;p.notionUrl=document.getElementById('md-notion').value;
+    p.labels=[...editLabels];
+  }else{
+    state.projects.unshift({id:uid(),name,stage:document.getElementById('md-stage').value,cat:document.getElementById('md-cat').value,priority:document.getElementById('md-priority').value,effort:document.getElementById('md-effort').value,dueDate:document.getElementById('md-due').value,labels:[...editLabels],notionUrl:document.getElementById('md-notion').value,ctx:document.getElementById('md-desc').value,tasks:[]});
   }
-  save();closeModal();
+  save();renderBoard();closeModal();
 }
+function archiveCard(){if(!editId)return;if(!confirm('Remove this project?'))return;state.projects=state.projects.filter(p=>p.id!==editId);save();renderBoard();closeModal();}
 
-function archiveCard(){
-  if(!editId)return;
-  const p=state.projects.find(x=>x.id===editId);
-  if(p){p.archived=true;save();}
-  closeModal();
+function renderModalChecklist(p){
+  const tt=p.tasks.length,td=p.tasks.filter(t=>t.done).length,pct=tt?Math.round(td/tt*100):0;
+  document.getElementById('md-prog-lbl').textContent=tt?`${td}/${tt} paths (${pct}%)`:'No paths yet';
+  document.getElementById('md-prog-fill').style.width=pct+'%';
+  let html='';
+  for(const t of p.tasks){
+    const stOpen=openStSections.has(t.id),stc=(t.subtasks||[]).length;
+    html+=`<div class="modal-task-wrap"><div class="modal-task-row ${t.done?'done':''}"><input type="checkbox" ${t.done?'checked':''} onchange="modalToggleTask('${p.id}','${t.id}')"><label onclick="modalToggleTask('${p.id}','${t.id}')">${escHtml(t.text)}</label>${stc?`<button class="modal-st-toggle" onclick="toggleSubTasks('${p.id}','${t.id}')">${stOpen?'&#9652;':'&#9662;'} ${stc} sub</button>`:''}<button class="modal-st-toggle" style="opacity:.55" onclick="showAddSt('${t.id}')">+ sub</button><button class="modal-task-del" onclick="modalDelTask('${p.id}','${t.id}')">&#10005;</button></div>${stOpen?renderSubTasks(p,t):''}<div class="modal-add-st" id="addst-${t.id}" style="display:none"><input placeholder="Add sub-path..." id="stinp-${t.id}" onkeydown="if(event.key==='Enter')modalAddSubTask('${p.id}','${t.id}')"><button onclick="modalAddSubTask('${p.id}','${t.id}')">+</button></div></div>`;
+  }
+  document.getElementById('md-checklist').innerHTML=html;
 }
+function renderSubTasks(p,t){return(t.subtasks||[]).map(s=>`<div class="modal-st-section"><div class="modal-st-row ${s.done?'done':''}"><input type="checkbox" ${s.done?'checked':''} onchange="modalToggleSubTask('${p.id}','${t.id}','${s.id}')"><label onclick="modalToggleSubTask('${p.id}','${t.id}','${s.id}')">${escHtml(s.text)}</label><button class="modal-st-del" onclick="modalDelSubTask('${p.id}','${t.id}','${s.id}')">&#10005;</button></div></div>`).join('');}
+function showAddSt(tid){const el=document.getElementById('addst-'+tid);if(el){el.style.display='flex';el.querySelector('input').focus();}}
+function toggleSubTasks(pid,tid){if(openStSections.has(tid))openStSections.delete(tid);else openStSections.add(tid);const p=state.projects.find(p=>p.id===pid);if(p)renderModalChecklist(p);}
+function modalToggleTask(pid,tid){const p=state.projects.find(p=>p.id===pid);if(!p)return;const t=p.tasks.find(t=>t.id===tid);if(t){t.done=!t.done;save();renderModalChecklist(p);}}
+function modalDelTask(pid,tid){const p=state.projects.find(p=>p.id===pid);if(!p)return;p.tasks=p.tasks.filter(t=>t.id!==tid);save();renderModalChecklist(p);}
+function modalAddTask(){const inp=document.getElementById('md-task-inp');const text=(inp.value||'').trim();if(!text||!editId)return;const p=state.projects.find(p=>p.id===editId);if(!p)return;p.tasks.push({id:uid(),text,done:false,subtasks:[]});inp.value='';save();renderModalChecklist(p);}
+function modalAddSubTask(pid,tid){const inp=document.getElementById('stinp-'+tid);const text=(inp.value||'').trim();if(!text)return;const p=state.projects.find(p=>p.id===pid);if(!p)return;const t=p.tasks.find(t=>t.id===tid);if(!t)return;if(!t.subtasks)t.subtasks=[];t.subtasks.push({id:uid(),text,done:false});openStSections.add(tid);inp.value='';save();renderModalChecklist(p);}
+function modalToggleSubTask(pid,tid,sid){const p=state.projects.find(p=>p.id===pid);if(!p)return;const t=p.tasks.find(t=>t.id===tid);if(!t)return;const s=(t.subtasks||[]).find(s=>s.id===sid);if(s){s.done=!s.done;save();renderModalChecklist(p);}}
+function modalDelSubTask(pid,tid,sid){const p=state.projects.find(p=>p.id===pid);if(!p)return;const t=p.tasks.find(t=>t.id===tid);if(!t)return;t.subtasks=(t.subtasks||[]).filter(s=>s.id!==sid);save();renderModalChecklist(p);}
 
-// ── MIND MAP ──
-function getLabelProps(a){
-  const n=((a%(2*Math.PI))+2*Math.PI)%(2*Math.PI);
-  if(n<Math.PI/2||n>3*Math.PI/2)return{dx:16,anchor:'start'};
-  return{dx:-16,anchor:'end'};
+function renderLabelGrid(){
+  document.getElementById('md-labels').innerHTML=LDEFS.map(l=>{const on=editLabels.includes(l.k);return`<button class="ltog ${on?'on':''}" style="${on?`background:${l.bg};color:${l.c};border-color:${l.c}`:''}" onclick="toggleLabel('${l.k}',this,'${l.bg}','${l.c}')">${l.lbl}</button>`;}).join('');
 }
+function toggleLabel(k,btn,bg,c){const i=editLabels.indexOf(k);if(i>=0){editLabels.splice(i,1);btn.style.background='';btn.style.borderColor='';btn.classList.remove('on');}else{editLabels.push(k);btn.style.background=bg;btn.style.borderColor=c;btn.classList.add('on');}}
+function updateNotionPreview(){const url=(document.getElementById('md-notion').value||'').trim();const el=document.getElementById('nlink-proj');if(el)el.innerHTML=url?`<a class="nlink" href="${escHtml(url)}" target="_blank" rel="noopener">&#128196; Project Page</a>`:'';}
 
-function renderMindMap(){
-  const g=document.getElementById('map-g');
-  if(!g)return;
-  const active=state.projects.filter(p=>!p.archived);
-  const total=active.length||1;
+const mapSvg=()=>document.getElementById('map-svg');
+const mapG=()=>document.getElementById('map-g');
+function setTransform(){const svg=mapSvg();mapG().setAttribute('transform',`translate(${svg.clientWidth/2+mapOffX},${svg.clientHeight/2+mapOffY}) scale(${mapScale})`);}
+function resetMap(){mapScale=0.65;mapOffX=0;mapOffY=0;setTransform();}
+function collapseAllMap(){expandedProjects.clear();expandedTasks.clear();drawMap();}
+function catBg(k){return{physical:'#2e2010',business:'#0a2010',tech:'#0a1525',operations:'#2a1808',vision:'#1a0a2e'}[k]||'#272420';}
+function projBg(st){return{ideas:'#1a1630',discovery:'#0a1e18',todo:'#0a1e12',doing:'#1e1800',verify:'#1e0c0c',iterate:'#1e1400',done:'#0a1e0a'}[st]||'#1c1a17';}
 
-  const catGroups=TG.map(gr=>({...gr,projs:active.filter(p=>p.cat===gr.k)})).filter(gr=>gr.projs.length>0);
+function drawMap(){
+  const g=mapG();g.innerHTML='';setTransform();
+  // Center node
+  const CX=0,CY=0,CW=120,CH=44;
+  svgRoundRect(g,CX-CW/2,CY-CH/2,CW,CH,'#1e1a14','#d97706',2,6);
+  svgRoundRect(g,CX-CW/2,CY-CH/2,3,CH,'#d97706','none',0,6);
+  const ct=svgEl('text');ct.setAttribute('x',CX-CW/2+10);ct.setAttribute('y',CY-7);ct.setAttribute('font-size','11');ct.setAttribute('font-weight','700');ct.setAttribute('fill','#f59e0b');ct.setAttribute('pointer-events','none');ct.textContent='MAX ENGLAND';g.appendChild(ct);
+  const cs=svgEl('text');cs.setAttribute('x',CX-CW/2+10);cs.setAttribute('y',CY+9);cs.setAttribute('font-size','7');cs.setAttribute('fill','#7a6f5e');cs.setAttribute('pointer-events','none');cs.textContent='Project Command · Dalton, GA';g.appendChild(cs);
 
-  let edges='', nodes='';
+  const cats=TG.map(tg=>({...tg,projs:state.projects.filter(p=>p.cat===tg.k)})).filter(c=>c.projs.length>0);
+  cats.forEach((cat,ci)=>{
+    const ang=(2*Math.PI/cats.length)*ci-Math.PI/2;
+    const cx=Math.cos(ang)*R_CAT,cy=Math.sin(ang)*R_CAT;
+    svgLine(g,0,0,cx,cy,'#3a352f',1.5);
+    // Category card
+    const KW=112,KH=40;
+    svgRoundRect(g,cx-KW/2,cy-KH/2,KW,KH,catBg(cat.k),CC[cat.k]||'#666',1.5,5);
+    svgRoundRect(g,cx-KW/2,cy-KH/2,3,KH,CC[cat.k]||'#666','none',0,5);
+    const kl=svgEl('text');kl.setAttribute('x',cx-KW/2+10);kl.setAttribute('y',cy-5);kl.setAttribute('font-size','9');kl.setAttribute('font-weight','700');kl.setAttribute('fill',CC[cat.k]||'#888');kl.setAttribute('pointer-events','none');kl.textContent=cat.icon+' '+cat.lbl;g.appendChild(kl);
+    const kc=svgEl('text');kc.setAttribute('x',cx-KW/2+10);kc.setAttribute('y',cy+9);kc.setAttribute('font-size','7.5');kc.setAttribute('fill','#7a6f5e');kc.setAttribute('pointer-events','none');kc.textContent=cat.projs.length+' project'+(cat.projs.length!==1?'s':'');g.appendChild(kc);
 
-  // Root node
-  nodes+=`<g>
-    <rect x="-62" y="-24" width="124" height="48" rx="9" fill="#2e2814" stroke="#f59e0b" stroke-width="2.5"/>
-    <text y="-6" text-anchor="middle" fill="#f59e0b" font-size="11" font-weight="800" font-family="Segoe UI,system-ui,sans-serif" letter-spacing="1.5">MAX ENGLAND</text>
-    <text y="12" text-anchor="middle" fill="#9a8f7e" font-size="9" font-family="Segoe UI,system-ui,sans-serif">Project Command · Dalton, GA</text>
-  </g>`;
+    const spread=cats.length===1?2*Math.PI:(2*Math.PI/cats.length)*0.82;
+    cat.projs.forEach((p,pi)=>{
+      const pAng=cat.projs.length===1?ang:ang+(spread/Math.max(cat.projs.length-1,1))*(pi-(cat.projs.length-1)/2);
+      const ppx=Math.cos(pAng)*R_PROJ,ppy=Math.sin(pAng)*R_PROJ;
+      const stCol=SC[p.stage]||'#888';
+      svgLine(g,cx,cy,ppx,ppy,'#3a352f',1);
+      // Project card
+      const PW=140,PH=62,rx5=5;
+      const bx=ppx-PW/2,by=ppy-PH/2;
+      svgRoundRect(g,bx,by,PW,PH,projBg(p.stage),stCol,1.5,rx5);
+      svgRoundRect(g,bx,by,3,PH,stCol,'none',0,rx5); // left accent
+      // Name
+      const nm=p.name.length>17?p.name.slice(0,16)+'…':p.name;
+      const nt=svgEl('text');nt.setAttribute('x',bx+10);nt.setAttribute('y',by+14);nt.setAttribute('font-size','10');nt.setAttribute('font-weight','700');nt.setAttribute('fill',CC[p.cat]||stCol);nt.setAttribute('pointer-events','none');nt.textContent=nm;g.appendChild(nt);
+      // Stage badge
+      const sl=(p.stage||'').charAt(0).toUpperCase()+(p.stage||'').slice(1);
+      const bw=sl.length*5.5+10;
+      svgRoundRect(g,bx+8,by+20,bw,14,stCol+'33',stCol,0.8,3);
+      const st=svgEl('text');st.setAttribute('x',bx+8+bw/2);st.setAttribute('y',by+27);st.setAttribute('text-anchor','middle');st.setAttribute('dominant-baseline','middle');st.setAttribute('font-size','7.5');st.setAttribute('fill',stCol);st.setAttribute('pointer-events','none');st.textContent=sl;g.appendChild(st);
+      // Priority dot
+      const pdCol={critical:'#ef4444',high:'#f59e0b',medium:'#f59e0b',none:'#3a352f'}[p.priority]||'#3a352f';
+      svgCircle(g,bx+PW-8,by+8,4,pdCol,pdCol,0);
+      // Progress bar
+      const td=p.tasks.filter(t=>t.done).length,tt=p.tasks.length;
+      const pct=tt>0?td/tt:0;
+      svgRoundRect(g,bx+8,by+40,PW-16,4,'#3a352f','none',0,2);
+      if(pct>0) svgRoundRect(g,bx+8,by+40,(PW-16)*pct,4,stCol,'none',0,2);
+      // Task count / pct text
+      const pc=svgEl('text');pc.setAttribute('x',bx+10);pc.setAttribute('y',by+54);pc.setAttribute('font-size','7.5');pc.setAttribute('fill','#7a6f5e');pc.setAttribute('pointer-events','none');pc.textContent=tt?Math.round(pct*100)+'%  ·  '+td+'/'+tt+' done':'+ '+p.tasks.length+' paths';g.appendChild(pc);
+      // Expand toggle text
+      const exp=expandedProjects.has(p.id);
+      const et=svgEl('text');et.setAttribute('x',bx+PW-8);et.setAttribute('y',by+54);et.setAttribute('text-anchor','end');et.setAttribute('font-size','7.5');et.setAttribute('fill',exp?stCol:'#5a5248');et.setAttribute('pointer-events','none');et.textContent=exp?'▲ collapse':'▼ expand';g.appendChild(et);
+      // Open-detail arrow
+      const la=svgEl('text');la.setAttribute('x',bx+PW-6);la.setAttribute('y',by+6);la.setAttribute('text-anchor','end');la.setAttribute('dominant-baseline','hanging');la.setAttribute('font-size','10');la.setAttribute('fill','#5a5248');la.setAttribute('cursor','pointer');la.textContent='↗';
+      la.addEventListener('mouseover',()=>la.setAttribute('fill','#f59e0b'));
+      la.addEventListener('mouseout',()=>la.setAttribute('fill','#5a5248'));
+      la.addEventListener('click',e=>{e.stopPropagation();openCard(p.id);});
+      g.appendChild(la);
+      // Hit rect for expand/collapse
+      const hit=svgEl('rect');hit.setAttribute('x',bx);hit.setAttribute('y',by);hit.setAttribute('width',PW);hit.setAttribute('height',PH);hit.setAttribute('rx','5');hit.setAttribute('fill','transparent');hit.setAttribute('cursor','pointer');
+      hit.addEventListener('click',e=>{e.stopPropagation();if(expandedProjects.has(p.id))expandedProjects.delete(p.id);else expandedProjects.add(p.id);drawMap();});
+      g.appendChild(hit);
 
-  let startAngle=-Math.PI/2;
-
-  catGroups.forEach(gr=>{
-    const arcSpan=(gr.projs.length/total)*2*Math.PI;
-    const midAngle=startAngle+arcSpan/2;
-    const cc=CC[gr.k];
-
-    // Category position
-    const cx=(R_CAT*Math.cos(midAngle)).toFixed(1);
-    const cy=(R_CAT*Math.sin(midAngle)).toFixed(1);
-
-    // Root → category edge
-    edges+=`<line x1="0" y1="0" x2="${cx}" y2="${cy}" stroke="${cc}" stroke-width="2" opacity="0.5"/>`;
-
-    // Category node
-    const hasExpanded=gr.projs.some(p=>expandedProjects.has(p.id));
-    nodes+=`<g transform="translate(${cx},${cy})">
-      <rect x="-54" y="-20" width="108" height="40" rx="7" fill="${cc}22" stroke="${cc}" stroke-width="${hasExpanded?2:1.5}" opacity="${hasExpanded?1:.85}"/>
-      <text y="-5" text-anchor="middle" fill="${cc}" font-size="10" font-weight="800" font-family="Segoe UI,system-ui,sans-serif">${gr.icon} ${gr.lbl}</text>
-      <text y="11" text-anchor="middle" fill="${cc}aa" font-size="8" font-family="Segoe UI,system-ui,sans-serif">${gr.projs.length} project${gr.projs.length!==1?'s':''}</text>
-    </g>`;
-
-    // Project nodes
-    gr.projs.forEach((p,i)=>{
-      let pAngle;
-      if(gr.projs.length===1){
-        pAngle=midAngle;
-      } else {
-        const pad=arcSpan*0.08;
-        const usable=arcSpan-2*pad;
-        pAngle=startAngle+pad+(i/(gr.projs.length-1))*usable;
-      }
-
-      const px=(R_PROJ*Math.cos(pAngle)).toFixed(1);
-      const py=(R_PROJ*Math.sin(pAngle)).toFixed(1);
-
-      // Category → project edge
-      edges+=`<line x1="${cx}" y1="${cy}" x2="${px}" y2="${py}" stroke="${cc}" stroke-width="1.5" opacity="0.4"/>`;
-
-      const tasks=p.tasks||[];
-      const doneC=tasks.filter(t=>t.done).length;
-      const pct=tasks.length?Math.round(doneC/tasks.length*100):-1;
-      const sc=SC[p.stage]||'#888';
-      const pc2=PC[p.priority||'none']||'transparent';
-      const isExp=expandedProjects.has(p.id);
-      const stTot=tasks.reduce((n,t)=>n+(t.subtasks||[]).length,0);
-
-      // Project node (120×56 rect)
-      nodes+=`<g transform="translate(${px},${py})" onclick="mmToggleProject('${p.id}')" style="cursor:pointer">
-        <rect x="-60" y="-28" width="120" height="56" rx="6" fill="#272420" stroke="${cc}" stroke-width="${isExp?2.2:1.2}" opacity="${isExp?1:.9}"/>
-        <rect x="-60" y="-28" width="5" height="56" rx="2" fill="${cc}"/>
-        ${pc2!=='transparent'?`<circle cx="48" cy="-20" r="5" fill="${pc2}"/>`:''}
-        <text x="-48" y="-12" fill="${cc}" font-size="9" font-weight="700" font-family="Segoe UI,system-ui,sans-serif">${truncate(p.name,16)}</text>
-        <rect x="-48" y="-5" width="50" height="13" rx="3" fill="${sc}22"/>
-        <text x="-23" y="5" text-anchor="middle" fill="${sc}" font-size="8" font-weight="700" font-family="Segoe UI,system-ui,sans-serif">${SLBL[p.stage]}</text>
-        ${pct>=0?`<rect x="-48" y="13" width="96" height="4" rx="2" fill="#3d3730"/>
-        <rect x="-48" y="13" width="${Math.round(96*pct/100)}" height="4" rx="2" fill="${pct===100?'#10b981':'#f59e0b'}"/>
-        <text x="50" y="16" text-anchor="end" fill="#9a8f7e" font-size="7" font-family="Segoe UI,system-ui,sans-serif">${pct}%</text>`:''}
-        <text x="-48" y="24" fill="${isExp?'#f59e0b':'#6b7280'}" font-size="7.5" font-family="Segoe UI,system-ui,sans-serif">${isExp?'▾':'▸'} ${tasks.length} path${tasks.length!==1?'s':''}${stTot?' · '+stTot+' sub':''}</text>
-        <g onclick="mmOpenCard('${p.id}',event)" style="cursor:pointer">
-          <rect x="42" y="-28" width="18" height="16" rx="3" fill="${cc}20" stroke="${cc}44" stroke-width="1"/>
-          <text x="51" y="-17" text-anchor="middle" fill="${cc}cc" font-size="9">↗</text>
-        </g>
-      </g>`;
-
-      // Task (path) nodes — only if project expanded
-      if(isExp&&tasks.length){
-        const taskArcSpan=Math.min(Math.PI*0.7,Math.PI*0.12*tasks.length);
-        tasks.forEach((t,ti)=>{
-          let tAngle;
-          if(tasks.length===1){tAngle=pAngle;}
-          else{tAngle=pAngle-taskArcSpan/2+(ti/(tasks.length-1))*taskArcSpan;}
-
-          const tx=(R_TASK*Math.cos(tAngle)).toFixed(1);
-          const ty=(R_TASK*Math.sin(tAngle)).toFixed(1);
-
-          // Project → task edge
-          edges+=`<line x1="${px}" y1="${py}" x2="${tx}" y2="${ty}" stroke="${cc}" stroke-width="1.2" opacity="0.35" stroke-dasharray="${t.done?'none':'5,3'}"/>`;
-
-          const subtasks=t.subtasks||[];
-          const stDoneC=subtasks.filter(s=>s.done).length;
-          const isExpT=expandedTasks.has(t.id);
-
-          // Task node (104×32 rect)
-          nodes+=`<g transform="translate(${tx},${ty})" onclick="mmToggleTask('${t.id}',event)" style="cursor:pointer">
-            <rect x="-52" y="-16" width="104" height="32" rx="4" fill="${t.done?cc+'22':'#272420'}" stroke="${t.done?cc+'88':cc+'55'}" stroke-width="${isExpT?1.6:1}"/>
-            <circle cx="-40" cy="0" r="7" fill="${t.done?cc+'33':'#1c1a17'}" stroke="${t.done?cc:'#3d3730'}" stroke-width="1.2"/>
-            <text x="-40" y="4" text-anchor="middle" fill="${t.done?cc:'#5a5248'}" font-size="9">${t.done?'✓':'○'}</text>
-            <text x="-27" y="-3" fill="${t.done?cc+'aa':'#c8bfb0'}" font-size="8" font-family="Segoe UI,system-ui,sans-serif">${truncate(t.text,13)}</text>
-            <text x="-27" y="9" fill="${isExpT?'#f59e0b':'#6b7280'}" font-size="7" font-family="Segoe UI,system-ui,sans-serif">${isExpT?'▾':'▸'} ${subtasks.length} sub${subtasks.length?` · ${stDoneC}✓`:''}</text>
-          </g>`;
-
-          // Sub-task (sub-path) nodes — only if task expanded
-          if(isExpT&&subtasks.length){
-            const stArcSpan=Math.min(Math.PI*0.35,Math.PI*0.1*subtasks.length);
-            subtasks.forEach((st,si)=>{
-              let stAngle;
-              if(subtasks.length===1){stAngle=tAngle;}
-              else{stAngle=tAngle-stArcSpan/2+(si/(subtasks.length-1))*stArcSpan;}
-
-              const sx=(R_ST*Math.cos(stAngle)).toFixed(1);
-              const sy=(R_ST*Math.sin(stAngle)).toFixed(1);
-
-              // Task → subtask edge
-              edges+=`<line x1="${tx}" y1="${ty}" x2="${sx}" y2="${sy}" stroke="${cc}" stroke-width="1" opacity="0.25" stroke-dasharray="3,3"/>`;
-
-              const lp=getLabelProps(stAngle);
-              nodes+=`<g transform="translate(${sx},${sy})">
-                <circle r="12" fill="${st.done?cc+'33':'#272420'}" stroke="${st.done?cc+'99':'#3d3730'}" stroke-width="1.2"/>
-                <text text-anchor="middle" y="4" fill="${st.done?cc:'#9a8f7e'}" font-size="9">${st.done?'✓':'·'}</text>
-                <text x="${lp.dx}" y="4" text-anchor="${lp.anchor}" fill="#8a7f70" font-size="7.5" font-family="Segoe UI,system-ui,sans-serif">${truncate(st.text,11)}</text>
-              </g>`;
+      if(exp&&p.tasks.length){
+        const tSpread=Math.min(1.4,p.tasks.length*0.32);
+        p.tasks.forEach((t,ti)=>{
+          const tAng=p.tasks.length===1?pAng:pAng+(tSpread/Math.max(p.tasks.length-1,1))*(ti-(p.tasks.length-1)/2);
+          const tx=Math.cos(tAng)*R_TASK,ty=Math.sin(tAng)*R_TASK;
+          svgLine(g,ppx,ppy,tx,ty,'#3a352f',0.8);
+          svgCircle(g,tx,ty,12,t.done?'#4a4540':'#3a352f',t.done?'#6b7280':stCol,1.5);
+          svgTextMulti(g,tx,ty,t.text,t.done?'#6b7280':'#c8bcaa',7,10);
+          const stc=(t.subtasks||[]).length,tExp=expandedTasks.has(t.id);
+          if(stc){
+            const sh=svgEl('circle');sh.setAttribute('cx',tx+9);sh.setAttribute('cy',ty-9);sh.setAttribute('r',5);sh.setAttribute('fill',tExp?stCol:'#272420');sh.setAttribute('stroke',stCol);sh.setAttribute('stroke-width','1');sh.setAttribute('cursor','pointer');
+            sh.addEventListener('click',e=>{e.stopPropagation();if(expandedTasks.has(t.id))expandedTasks.delete(t.id);else expandedTasks.add(t.id);drawMap();});
+            g.appendChild(sh);
+            const sl2=svgEl('text');sl2.setAttribute('x',tx+9);sl2.setAttribute('y',ty-9);sl2.setAttribute('text-anchor','middle');sl2.setAttribute('dominant-baseline','middle');sl2.setAttribute('font-size','6');sl2.setAttribute('fill',tExp?'#000':'#9a8f7e');sl2.setAttribute('pointer-events','none');sl2.textContent=tExp?'-':'+';g.appendChild(sl2);
+          }
+          if(tExp&&stc){
+            const sSpread=Math.min(0.9,stc*0.22);
+            (t.subtasks||[]).forEach((s,si)=>{
+              const sAng=stc===1?tAng:tAng+(sSpread/Math.max(stc-1,1))*(si-(stc-1)/2);
+              const sx2=Math.cos(sAng)*R_ST,sy2=Math.sin(sAng)*R_ST;
+              svgLine(g,tx,ty,sx2,sy2,'#2a2520',0.6);
+              svgCircle(g,sx2,sy2,8,s.done?'#2a2520':'#272420',s.done?'#4a4540':'#5a5248',1);
+              svgTextMulti(g,sx2,sy2,s.text,s.done?'#4a4540':'#7a6f5e',6,7);
             });
           }
+          const th=svgEl('circle');th.setAttribute('cx',tx);th.setAttribute('cy',ty);th.setAttribute('r',12);th.setAttribute('fill','transparent');th.setAttribute('cursor','pointer');
+          th.addEventListener('click',e=>{e.stopPropagation();openCard(p.id);});
+          g.appendChild(th);
         });
       }
     });
-
-    startAngle+=arcSpan;
   });
-
-  g.innerHTML=edges+nodes;
-  g.setAttribute('transform',`translate(${mapOffX} ${mapOffY}) scale(${mapScale})`);
 }
 
-function mmToggleProject(pid){
-  if(expandedProjects.has(pid))expandedProjects.delete(pid);
-  else expandedProjects.add(pid);
-  renderMindMap();
+function svgEl(tag){return document.createElementNS('http://www.w3.org/2000/svg',tag);}
+function svgRoundRect(g,x,y,w,h,fill,stroke,sw,rx){const r=svgEl('rect');r.setAttribute('x',x);r.setAttribute('y',y);r.setAttribute('width',Math.max(w,0));r.setAttribute('height',h);r.setAttribute('rx',rx||0);r.setAttribute('ry',rx||0);r.setAttribute('fill',fill);if(stroke&&stroke!=='none'){r.setAttribute('stroke',stroke);r.setAttribute('stroke-width',sw||1);}r.setAttribute('pointer-events','none');g.appendChild(r);}
+function svgLine(g,x1,y1,x2,y2,s,sw){const l=svgEl('line');l.setAttribute('x1',x1);l.setAttribute('y1',y1);l.setAttribute('x2',x2);l.setAttribute('y2',y2);l.setAttribute('stroke',s);l.setAttribute('stroke-width',sw);g.appendChild(l);}
+function svgCircle(g,cx,cy,r,fill,stroke,sw){const c=svgEl('circle');c.setAttribute('cx',cx);c.setAttribute('cy',cy);c.setAttribute('r',r);c.setAttribute('fill',fill);c.setAttribute('stroke',stroke);c.setAttribute('stroke-width',sw);c.setAttribute('pointer-events','none');g.appendChild(c);}
+function svgText(g,x,y,txt,fill,size,bold){const t=svgEl('text');t.setAttribute('x',x);t.setAttribute('y',y);t.setAttribute('text-anchor','middle');t.setAttribute('dominant-baseline','middle');t.setAttribute('font-size',size);t.setAttribute('fill',fill||'#e8dcc8');if(bold)t.setAttribute('font-weight','700');t.setAttribute('pointer-events','none');t.textContent=txt;g.appendChild(t);}
+function svgTextMulti(g,x,y,txt,fill,size,maxW){
+  const words=txt.split(' ');const lines=[];let cur='';
+  for(const w of words){const test=cur?cur+' '+w:w;if(test.length*size*0.54>maxW*2&&cur){lines.push(cur);cur=w;}else{cur=test;}}
+  if(cur)lines.push(cur);
+  const lh=size*1.35,startY=y-(lines.length-1)*lh/2;
+  lines.slice(0,2).forEach((l,i)=>svgText(g,x,startY+i*lh,l,fill,size,false));
+}
+function initMapEvents(){
+  const svg=mapSvg();
+  svg.addEventListener('wheel',e=>{e.preventDefault();mapScale=Math.max(0.15,Math.min(3,mapScale*(e.deltaY>0?0.9:1.1)));setTransform();},{passive:false});
+  svg.addEventListener('mousedown',e=>{if(e.button!==0)return;mapDragging=true;mapDragSX=e.clientX;mapDragSY=e.clientY;mapDragOX=mapOffX;mapDragOY=mapOffY;svg.style.cursor='grabbing';});
+  window.addEventListener('mousemove',e=>{if(!mapDragging)return;mapOffX=mapDragOX+(e.clientX-mapDragSX);mapOffY=mapDragOY+(e.clientY-mapDragSY);setTransform();});
+  window.addEventListener('mouseup',()=>{mapDragging=false;mapSvg().style.cursor='grab';});
 }
 
-function mmToggleTask(tid,e){
-  e.stopPropagation();
-  if(expandedTasks.has(tid))expandedTasks.delete(tid);
-  else expandedTasks.add(tid);
-  renderMindMap();
-}
-
-function mmOpenCard(pid,e){
-  e.stopPropagation();
-  openCard(pid);
-}
-
-function initMindMap(){
-  if(mmInited)return;
-  const el=document.getElementById('tree');
-  if(!el||!el.clientWidth){setTimeout(initMindMap,60);return;}
-  mapOffX=el.clientWidth/2;
-  mapOffY=el.clientHeight/2;
-  mapScale=Math.min(el.clientWidth,el.clientHeight)/(R_PROJ*2+200);
-  mmInited=true;
-
-  const svg=document.getElementById('map-svg');
-  if(!svg)return;
-
-  svg.addEventListener('mousedown',mmDragStart);
-  window.addEventListener('mousemove',mmDragMove);
-  window.addEventListener('mouseup',mmDragEnd);
-  svg.addEventListener('wheel',mmZoom,{passive:false});
-  svg.addEventListener('touchstart',mmTouchStart,{passive:true});
-  svg.addEventListener('touchmove',mmTouchMove,{passive:false});
-  svg.addEventListener('touchend',mmDragEnd);
-}
-
-function mmDragStart(e){
-  if(e.button!==0)return;
-  mapDragging=true;
-  mapDragSX=e.clientX;mapDragSY=e.clientY;
-  mapDragOX=mapOffX;mapDragOY=mapOffY;
-  document.getElementById('map-svg').style.cursor='grabbing';
-}
-function mmDragMove(e){
-  if(!mapDragging)return;
-  mapOffX=mapDragOX+(e.clientX-mapDragSX);
-  mapOffY=mapDragOY+(e.clientY-mapDragSY);
-  const g=document.getElementById('map-g');
-  if(g)g.setAttribute('transform',`translate(${mapOffX} ${mapOffY}) scale(${mapScale})`);
-}
-function mmDragEnd(){
-  if(!mapDragging)return;
-  mapDragging=false;
-  const svg=document.getElementById('map-svg');
-  if(svg)svg.style.cursor='grab';
-}
-function mmZoom(e){
-  e.preventDefault();
-  const svg=document.getElementById('map-svg');if(!svg)return;
-  const rect=svg.getBoundingClientRect();
-  const mx=e.clientX-rect.left;
-  const my=e.clientY-rect.top;
-  const factor=e.deltaY>0?0.88:1.14;
-  const newScale=Math.max(0.12,Math.min(4,mapScale*factor));
-  const ratio=newScale/mapScale;
-  mapOffX=mx-(mx-mapOffX)*ratio;
-  mapOffY=my-(my-mapOffY)*ratio;
-  mapScale=newScale;
-  const g=document.getElementById('map-g');
-  if(g)g.setAttribute('transform',`translate(${mapOffX} ${mapOffY}) scale(${mapScale})`);
-}
-
-let _touchLastDist=0;
-function mmTouchStart(e){
-  if(e.touches.length===1){
-    mapDragging=true;
-    mapDragSX=e.touches[0].clientX;mapDragSY=e.touches[0].clientY;
-    mapDragOX=mapOffX;mapDragOY=mapOffY;
-  } else if(e.touches.length===2){
-    const dx=e.touches[0].clientX-e.touches[1].clientX;
-    const dy=e.touches[0].clientY-e.touches[1].clientY;
-    _touchLastDist=Math.sqrt(dx*dx+dy*dy);
-  }
-}
-function mmTouchMove(e){
-  e.preventDefault();
-  if(e.touches.length===1&&mapDragging){
-    mapOffX=mapDragOX+(e.touches[0].clientX-mapDragSX);
-    mapOffY=mapDragOY+(e.touches[0].clientY-mapDragSY);
-    const g=document.getElementById('map-g');
-    if(g)g.setAttribute('transform',`translate(${mapOffX} ${mapOffY}) scale(${mapScale})`);
-  } else if(e.touches.length===2){
-    const dx=e.touches[0].clientX-e.touches[1].clientX;
-    const dy=e.touches[0].clientY-e.touches[1].clientY;
-    const dist=Math.sqrt(dx*dx+dy*dy);
-    if(_touchLastDist>0){
-      const factor=dist/_touchLastDist;
-      mapScale=Math.max(0.12,Math.min(4,mapScale*factor));
-      const g=document.getElementById('map-g');
-      if(g)g.setAttribute('transform',`translate(${mapOffX} ${mapOffY}) scale(${mapScale})`);
-    }
-    _touchLastDist=dist;
-  }
-}
-
-function resetMap(){
-  mmInited=false;
-  initMindMap();
-  renderMindMap();
-}
-
-function collapseAllMap(){
-  expandedProjects.clear();
-  expandedTasks.clear();
-  renderMindMap();
-}
-
-// ── VIEW SWITCH ──
-function setView(v){
-  document.querySelectorAll('.view').forEach(el=>el.classList.remove('on'));
-  document.querySelectorAll('.tab').forEach(el=>el.classList.remove('on'));
-  document.getElementById(v==='board'?'board':'tree').classList.add('on');
-  document.querySelectorAll('.tab')[v==='board'?0:1].classList.add('on');
-  if(v==='tree'){
-    requestAnimationFrame(()=>{initMindMap();renderMindMap();});
-  }
-}
-
-// ── UTILITIES ──
-function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-function truncate(s,n){return s.length>n?s.slice(0,n)+'…':s;}
-
-// ── INIT ──
-load();
-renderBoard();
+load();renderBoard();initMapEvents();setTransform();
 </script>
 </body>
 </html>
